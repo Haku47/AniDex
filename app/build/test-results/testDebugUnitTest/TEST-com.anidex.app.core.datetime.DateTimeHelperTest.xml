@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.anidex.app.core.datetime.DateTimeHelperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-21T14:41:45.051Z" hostname="GEEKPOI" time="0.034">
+  <properties/>
+  <testcase name="parseDayOfWeek handles plurals and casing accurately" classname="com.anidex.app.core.datetime.DateTimeHelperTest" time="0.022"/>
+  <testcase name="calculateLocalAirTime correctly rolls day backwards when converting JST to WIB" classname="com.anidex.app.core.datetime.DateTimeHelperTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
