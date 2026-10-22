@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -22,9 +23,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.domain.model.WatchStatus
 import com.anidex.app.ui.components.EmptyState
 import com.anidex.app.ui.components.WatchProgressCard
@@ -45,6 +48,7 @@ fun WatchlistScreen(
         modifier = modifier
             .fillMaxSize()
             .background(DeepBackground)
+            .statusBarsPadding()
             .padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(14.dp))
@@ -56,12 +60,12 @@ fun WatchlistScreen(
 
         // Status filter tabs
         val filterOptions: List<Pair<String, WatchStatus?>> = listOf(
-            "Semua" to null,
-            "Menonton" to WatchStatus.WATCHING,
-            "Selesai" to WatchStatus.COMPLETED,
-            "Rencana" to WatchStatus.PLAN_TO_WATCH,
-            "Ditunda" to WatchStatus.ON_HOLD,
-            "Ditinggalkan" to WatchStatus.DROPPED
+            stringResource(R.string.status_all) to null,
+            stringResource(R.string.status_watching) to WatchStatus.WATCHING,
+            stringResource(R.string.status_completed) to WatchStatus.COMPLETED,
+            stringResource(R.string.status_plan) to WatchStatus.PLAN_TO_WATCH,
+            stringResource(R.string.status_hold) to WatchStatus.ON_HOLD,
+            stringResource(R.string.status_dropped) to WatchStatus.DROPPED
         )
 
         LazyRow(
@@ -92,8 +96,8 @@ fun WatchlistScreen(
 
         if (state.filteredEntries.isEmpty()) {
             EmptyState(
-                title = "Watchlist Kosong",
-                subtitle = "Kamu belum menambahkan anime ke kategori ini. Jelajahi katalog dan tekan ikon bookmark untuk mulai melacak!"
+                title = stringResource(R.string.empty_watchlist_title),
+                subtitle = stringResource(R.string.empty_watchlist_subtitle)
             )
         } else {
             LazyColumn(

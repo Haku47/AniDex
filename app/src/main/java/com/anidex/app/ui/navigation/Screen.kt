@@ -1,5 +1,6 @@
 package com.anidex.app.ui.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -12,10 +13,12 @@ import androidx.compose.material.icons.outlined.Leaderboard
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.VideoLibrary
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.anidex.app.R
 
 sealed class Screen(
     val route: String,
     val title: String = "",
+    @StringRes val titleRes: Int = 0,
     val selectedIcon: ImageVector? = null,
     val unselectedIcon: ImageVector? = null
 ) {
@@ -29,14 +32,16 @@ sealed class Screen(
     // Main App Scaffold (Bottom Bar Tabs)
     data object Discover : Screen(
         route = "discover",
-        title = "Jelajah",
+        title = "Discover",
+        titleRes = R.string.nav_discover,
         selectedIcon = Icons.Filled.AutoAwesome,
         unselectedIcon = Icons.Outlined.AutoAwesome
     )
 
     data object Schedule : Screen(
         route = "schedule",
-        title = "Jadwal",
+        title = "Schedule",
+        titleRes = R.string.nav_schedule,
         selectedIcon = Icons.Filled.CalendarMonth,
         unselectedIcon = Icons.Outlined.CalendarMonth
     )
@@ -44,20 +49,23 @@ sealed class Screen(
     data object Watchlist : Screen(
         route = "watchlist",
         title = "Watchlist",
+        titleRes = R.string.nav_watchlist,
         selectedIcon = Icons.Filled.VideoLibrary,
         unselectedIcon = Icons.Outlined.VideoLibrary
     )
 
     data object Stats : Screen(
         route = "stats",
-        title = "Statistik",
+        title = "Stats",
+        titleRes = R.string.nav_stats,
         selectedIcon = Icons.Filled.Leaderboard,
         unselectedIcon = Icons.Outlined.Leaderboard
     )
 
     data object Profile : Screen(
         route = "profile",
-        title = "Profil",
+        title = "Profile",
+        titleRes = R.string.nav_profile,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
@@ -68,6 +76,7 @@ sealed class Screen(
     }
 
     data object Settings : Screen(route = "settings")
+    data object EditProfile : Screen(route = "edit_profile")
 }
 
 val BottomNavItems = listOf(

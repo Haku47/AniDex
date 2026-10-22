@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -23,9 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.ui.components.AiringScheduleCard
 import com.anidex.app.ui.components.EmptyState
 import com.anidex.app.ui.components.ErrorState
@@ -51,12 +54,13 @@ fun ScheduleScreen(
         modifier = modifier
             .fillMaxSize()
             .background(DeepBackground)
+            .statusBarsPadding()
             .padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
-            text = "Jadwal Tayang Rilis (Waktu Lokal)",
+            text = stringResource(R.string.schedule_title),
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
             color = TextPrimary
@@ -74,13 +78,13 @@ fun ScheduleScreen(
                 val isSelected = day == state.selectedDay
                 val isToday = day == today
                 val dayLabel = when (day) {
-                    DayOfWeek.MONDAY -> "Senin"
-                    DayOfWeek.TUESDAY -> "Selasa"
-                    DayOfWeek.WEDNESDAY -> "Rabu"
-                    DayOfWeek.THURSDAY -> "Kamis"
-                    DayOfWeek.FRIDAY -> "Jumat"
-                    DayOfWeek.SATURDAY -> "Sabtu"
-                    DayOfWeek.SUNDAY -> "Minggu"
+                    DayOfWeek.MONDAY -> stringResource(R.string.day_monday)
+                    DayOfWeek.TUESDAY -> stringResource(R.string.day_tuesday)
+                    DayOfWeek.WEDNESDAY -> stringResource(R.string.day_wednesday)
+                    DayOfWeek.THURSDAY -> stringResource(R.string.day_thursday)
+                    DayOfWeek.FRIDAY -> stringResource(R.string.day_friday)
+                    DayOfWeek.SATURDAY -> stringResource(R.string.day_saturday)
+                    DayOfWeek.SUNDAY -> stringResource(R.string.day_sunday)
                 }
 
                 Surface(
@@ -117,7 +121,7 @@ fun ScheduleScreen(
 
         when {
             state.isLoading -> {
-                LoadingState(message = "Sinkronisasi jadwal tayang anime...")
+                LoadingState(message = stringResource(R.string.loading_schedule))
             }
             state.errorMessage != null -> {
                 ErrorState(
@@ -127,8 +131,8 @@ fun ScheduleScreen(
             }
             state.schedulesForSelectedDay.isEmpty() -> {
                 EmptyState(
-                    title = "Tidak Ada Jadwal Tayang",
-                    subtitle = "Belum ada anime yang terdaftar tayang pada hari ini."
+                    title = stringResource(R.string.empty_schedule_title),
+                    subtitle = stringResource(R.string.empty_schedule_subtitle)
                 )
             }
             else -> {

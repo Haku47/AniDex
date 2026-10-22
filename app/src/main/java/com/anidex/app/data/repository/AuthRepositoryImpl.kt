@@ -33,14 +33,27 @@ class AuthRepositoryImpl @Inject constructor(
     init {
         val savedEmail = prefs.getString("user_email", null)
         val savedName = prefs.getString("user_name", null)
+        val savedAvatar = prefs.getString("user_avatar", "kitsune")
+        val savedBio = prefs.getString("user_bio", "Penjelajah & Pelacak Anime Baru")
+        val savedJoined = prefs.getString("user_joined", "Oktober 2026") ?: "Oktober 2026"
+
         if (!savedEmail.isNullOrBlank() && !savedName.isNullOrBlank()) {
             _currentUser.value = User(
                 id = "usr_1",
                 name = savedName,
                 email = savedEmail,
-                avatarUrl = null,
-                bio = prefs.getString("user_bio", "Otaku & Anime Collector") ?: "",
-                joinedDate = prefs.getString("user_joined", "Oktober 2026") ?: "Oktober 2026"
+                avatarUrl = savedAvatar,
+                bio = savedBio ?: "Penjelajah & Pelacak Anime Baru",
+                joinedDate = savedJoined
+            )
+        } else if (!savedName.isNullOrBlank()) {
+            _currentUser.value = User(
+                id = "guest_001",
+                name = savedName,
+                email = "guest@anidex.app",
+                avatarUrl = savedAvatar,
+                bio = savedBio ?: "Penjelajah & Pelacak Anime Baru",
+                joinedDate = savedJoined
             )
         }
     }
@@ -125,12 +138,24 @@ class AuthRepositoryImpl @Inject constructor(
         _currentUser.value = null
     }
 
-    override suspend fun updateProfile(name: String, bio: String): Resource<User> {
-        val current = _currentUser.value ?: return Resource.Error("Sesi tidak ditemukan.")
-        val updated = current.copy(name = name, bio = bio)
+    override suspend fun updateProfile(name: String, bio: String, avatarUrl: String?): Resource<User> {
+        val current = _currentUser.value ?: User(
+            id = "guest_001",
+            name = name.ifBlank { "Pengguna Tamu" },
+            email = "guest@anidex.app",
+            avatarUrl = avatarUrl ?: "kitsune",
+            bio = bio.ifBlank { "Penjelajah & Pelacak Anime Baru" },
+            joinedDate = "Oktober 2026"
+        )
+        val updated = current.copy(
+            name = name.ifBlank { current.name },
+            bio = bio.ifBlank { current.bio },
+            avatarUrl = avatarUrl ?: current.avatarUrl ?: "kitsune"
+        )
         prefs.edit()
             .putString("user_name", updated.name)
             .putString("user_bio", updated.bio)
+            .putString("user_avatar", updated.avatarUrl ?: "kitsune")
             .apply()
         _currentUser.value = updated
         return Resource.Success(updated)

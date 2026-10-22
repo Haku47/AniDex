@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,9 +28,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.domain.model.AnimeFormat
 import com.anidex.app.ui.components.WatchTimeHeaderCard
 import com.anidex.app.ui.theme.BrandBlue
@@ -53,6 +56,7 @@ fun StatsScreen(
         modifier = modifier
             .fillMaxSize()
             .background(DeepBackground)
+            .statusBarsPadding()
             .padding(horizontal = 16.dp),
         contentPadding = PaddingValues(top = 16.dp, bottom = 80.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -67,7 +71,7 @@ fun StatsScreen(
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = "Analitik Jam Tontonan",
+                    text = stringResource(R.string.stats_title),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     color = TextPrimary
@@ -88,7 +92,7 @@ fun StatsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Distribusi Waktu Menurut Format",
+                        text = stringResource(R.string.stats_format_breakdown),
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
                         color = TextPrimary
@@ -153,7 +157,7 @@ fun StatsScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Statistik Watchlist Kamu",
+                        text = stringResource(R.string.stats_status_distribution),
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
                         color = TextPrimary

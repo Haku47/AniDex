@@ -1,0 +1,161 @@
+<resources>
+    <string name="app_name">AniDex</string>
+    <string name="app_subtitle">Katalog Anime &amp; Pelacak Pintar</string>
+
+    <!-- Navigation -->
+    <string name="nav_discover">Jelajah</string>
+    <string name="nav_schedule">Jadwal</string>
+    <string name="nav_watchlist">Watchlist</string>
+    <string name="nav_stats">Statistik</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Discover Screen -->
+    <string name="search_placeholder">Cari anime berdasarkan judul…</string>
+    <string name="tab_trending">Sedang Tren</string>
+    <string name="tab_top_rated">Rating Tertinggi</string>
+    <string name="tab_airing">Sedang Tayang</string>
+    <string name="tab_recommendations">Untukmu</string>
+    <string name="section_trending_now">Anime Sedang Tren Sekarang</string>
+    <string name="section_recommendations">Rekomendasi Berbobot Untukmu</string>
+    <string name="section_top_anime">Anime Terpopuler &amp; Rating Tertinggi</string>
+    <string name="section_airing_now">Sorotan Sedang Tayang</string>
+    <string name="category_all">Semua</string>
+    <string name="category_action">Aksi</string>
+    <string name="category_adventure">Petualangan</string>
+    <string name="category_comedy">Komedi</string>
+    <string name="category_fantasy">Fantasi</string>
+    <string name="category_romance">Romansa</string>
+    <string name="category_scifi">Sci-Fi</string>
+    <string name="category_drama">Drama</string>
+    <string name="category_supernatural">Supranatural</string>
+    <string name="empty_search_title">Tidak Ditemukan</string>
+    <string name="empty_search_subtitle">Tidak ada anime yang cocok dengan \"%1$s\"</string>
+    <string name="msg_added_to_watchlist">Ditambahkan ke Watchlist!</string>
+    <string name="loading_catalog">Memuat katalog anime…</string>
+    <string name="loading_category">Memuat anime kategori %1$s…</string>
+
+    <!-- Schedule Screen -->
+    <string name="schedule_title">Jadwal Tayang Rilis (Waktu Lokal)</string>
+    <string name="empty_schedule_title">Tidak Ada Jadwal Tayang</string>
+    <string name="empty_schedule_subtitle">Belum ada anime yang terdaftar tayang pada hari ini.</string>
+    <string name="day_monday">Sen</string>
+    <string name="day_tuesday">Sel</string>
+    <string name="day_wednesday">Rab</string>
+    <string name="day_thursday">Kam</string>
+    <string name="day_friday">Jum</string>
+    <string name="day_saturday">Sab</string>
+    <string name="day_sunday">Min</string>
+    <string name="loading_schedule">Sinkronisasi jadwal tayang anime…</string>
+
+    <!-- Watchlist Screen -->
+    <string name="status_all">Semua</string>
+    <string name="status_watching">Menonton</string>
+    <string name="status_completed">Selesai</string>
+    <string name="status_plan">Rencana</string>
+    <string name="status_hold">Ditunda</string>
+    <string name="status_dropped">Ditinggalkan</string>
+    <string name="empty_watchlist_title">Watchlist Kosong</string>
+    <string name="empty_watchlist_subtitle">Kamu belum menambahkan anime ke kategori ini. Jelajahi katalog dan tekan ikon bookmark untuk mulai melacak!</string>
+    <string name="label_total_watch_time">Total Waktu Tonton</string>
+    <string name="label_episodes">Episode</string>
+    <string name="label_score">Skor</string>
+    <string name="action_delete">Hapus</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Analitik Jam Tontonan</string>
+    <string name="stats_total_hours">Total Jam</string>
+    <string name="stats_completed_titles">Selesai</string>
+    <string name="stats_watching_titles">Menonton</string>
+    <string name="stats_episodes_watched">Episode Ditonton</string>
+    <string name="stats_status_distribution">Distribusi Status Tontonan</string>
+    <string name="stats_format_breakdown">Format Tontonan Terbanyak</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_guest_user">Pengguna Tamu</string>
+    <string name="profile_not_logged_in">Belum masuk akun</string>
+    <string name="profile_enthusiast">Penjelajah &amp; Pelacak Anime</string>
+    <string name="profile_menu_heading">Menu &amp; Pengaturan</string>
+    <string name="profile_app_settings">Pengaturan Aplikasi</string>
+    <string name="profile_edit_info">Edit Informasi Profil</string>
+    <string name="profile_share">Bagikan Profil Saya</string>
+    <string name="profile_about">Tentang AniDex</string>
+    <string name="profile_logout">Keluar dari Akun</string>
+    <string name="profile_share_toast">Membagikan statistik tontonanmu!</string>
+
+    <!-- Edit Profile Screen -->
+    <string name="edit_profile_title">Edit Profil</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_saving">Menyimpan…</string>
+    <string name="section_profile_photo">Foto Profil</string>
+    <string name="btn_upload_gallery">Unggah Foto dari Galeri HP</string>
+    <string name="subtitle_upload_gallery">Pilih foto anime favorit dari penyimpanan perangkat</string>
+    <string name="section_avatar_presets">Preset Avatar Maskot</string>
+    <string name="label_username">Nama Pengguna</string>
+    <string name="hint_username">Ketik nama tampilan kamu</string>
+    <string name="label_bio">Bio Singkat</string>
+    <string name="hint_bio">Tuliskan bio singkat tentang dirimu</string>
+    <string name="section_account_info">Informasi Akun Terdaftar</string>
+    <string name="account_email">Email Akun</string>
+    <string name="account_status">Status Akun</string>
+    <string name="account_role">Peran Pengguna</string>
+    <string name="account_role_val">Member Standar</string>
+    <string name="account_active">Aktif &amp; Terverifikasi</string>
+    <string name="msg_profile_saved">Profil berhasil disimpan!</string>
+    <string name="msg_photo_selected">Foto profil berhasil dipilih!</string>
+    <string name="msg_name_empty">Nama tidak boleh kosong</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_section_notifications">Pemberitahuan</string>
+    <string name="settings_notif_new_episodes">Rilis Episode Baru</string>
+    <string name="settings_notif_new_episodes_sub">Notifikasi instan saat anime yang kamu tonton tayang</string>
+    <string name="settings_notif_today_schedule">Jadwal Tayang Hari Ini</string>
+    <string name="settings_notif_today_schedule_sub">Rangkuman anime yang tayang hari ini setiap pagi</string>
+    <string name="settings_section_appearance">Tampilan &amp; Bahasa</string>
+    <string name="settings_dark_mode">Tema Gelap Otomatis</string>
+    <string name="settings_dark_mode_sub">Palet warna Amoled Pure Black dengan aksen Fox Mascot</string>
+    <string name="settings_language">Bahasa Aplikasi</string>
+    <string name="dialog_select_language">Pilih Bahasa</string>
+    <string name="settings_section_storage">Penyimpanan &amp; Cache</string>
+    <string name="settings_clear_cache">Hapus Cache Gambar</string>
+    <string name="settings_clear_cache_sub">Bersihkan ruang penyimpanan dari poster anime</string>
+    <string name="msg_cache_cleared">Cache gambar berhasil dibersihkan!</string>
+    <string name="settings_section_about">Tentang AniDex</string>
+    <string name="settings_version">Versi Aplikasi</string>
+    <string name="settings_developer">Pengembang &amp; Engine</string>
+    <string name="settings_engine_val">Google DeepMind Jetpack Compose Engine</string>
+
+    <!-- Anime Detail Screen -->
+    <string name="detail_score">Skor</string>
+    <string name="detail_episodes">Episode</string>
+    <string name="detail_rank">Peringkat</string>
+    <string name="detail_popularity">Popularitas</string>
+    <string name="detail_status">Status</string>
+    <string name="detail_format">Format</string>
+    <string name="detail_duration">Durasi</string>
+    <string name="detail_season_year">Musim / Tahun</string>
+    <string name="detail_broadcast">Jadwal Tayang</string>
+    <string name="detail_synopsis">Sinopsis</string>
+    <string name="detail_read_more">Baca Selengkapnya</string>
+    <string name="detail_show_less">Tampilkan Lebih Sedikit</string>
+    <string name="detail_add_to_watchlist">Tambah ke Watchlist</string>
+    <string name="detail_in_watchlist">Dalam Watchlist</string>
+    <string name="detail_specs">Informasi Tambahan</string>
+
+    <!-- Auth -->
+    <string name="login_title">Selamat Datang di AniDex</string>
+    <string name="login_subtitle">Masuk untuk sinkronisasi watchlist dan statistik animemu</string>
+    <string name="login_email_hint">Alamat email</string>
+    <string name="login_password_hint">Kata sandi</string>
+    <string name="login_btn">Masuk</string>
+    <string name="login_guest_btn">Lanjutkan sebagai Tamu</string>
+    <string name="login_forgot_password">Lupa kata sandi?</string>
+    <string name="login_no_account">Belum punya akun? Daftar</string>
+    <string name="register_title">Buat Akun AniDex</string>
+    <string name="register_name_hint">Nama tampilan</string>
+    <string name="register_btn">Daftar</string>
+    <string name="register_has_account">Sudah punya akun? Masuk</string>
+    <string name="forgot_password_title">Atur Ulang Kata Sandi</string>
+    <string name="forgot_password_btn">Kirim Tautan Atur Ulang</string>
+</resources>
+

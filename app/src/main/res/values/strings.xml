@@ -1,3 +1,160 @@
 <resources>
     <string name="app_name">AniDex</string>
+    <string name="app_subtitle">Anime Catalog &amp; Smart Tracker</string>
+
+    <!-- Navigation -->
+    <string name="nav_discover">Discover</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_watchlist">Watchlist</string>
+    <string name="nav_stats">Statistics</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Discover Screen -->
+    <string name="search_placeholder">Search anime by title…</string>
+    <string name="tab_trending">Trending</string>
+    <string name="tab_top_rated">Top Rated</string>
+    <string name="tab_airing">Airing</string>
+    <string name="tab_recommendations">For You</string>
+    <string name="section_trending_now">Trending Anime Now</string>
+    <string name="section_recommendations">Recommended For You</string>
+    <string name="section_top_anime">Top Anime &amp; Highest Rated</string>
+    <string name="section_airing_now">Currently Airing Highlights</string>
+    <string name="category_all">All</string>
+    <string name="category_action">Action</string>
+    <string name="category_adventure">Adventure</string>
+    <string name="category_comedy">Comedy</string>
+    <string name="category_fantasy">Fantasy</string>
+    <string name="category_romance">Romance</string>
+    <string name="category_scifi">Sci-Fi</string>
+    <string name="category_drama">Drama</string>
+    <string name="category_supernatural">Supernatural</string>
+    <string name="empty_search_title">Not Found</string>
+    <string name="empty_search_subtitle">No anime matched \"%1$s\"</string>
+    <string name="msg_added_to_watchlist">Added to Watchlist!</string>
+    <string name="loading_catalog">Loading anime catalog…</string>
+    <string name="loading_category">Loading %1$s anime…</string>
+
+    <!-- Schedule Screen -->
+    <string name="schedule_title">Airing Schedule (Local Time)</string>
+    <string name="empty_schedule_title">No Airing Schedule</string>
+    <string name="empty_schedule_subtitle">No anime currently scheduled for broadcast on this day.</string>
+    <string name="day_monday">Mon</string>
+    <string name="day_tuesday">Tue</string>
+    <string name="day_wednesday">Wed</string>
+    <string name="day_thursday">Thu</string>
+    <string name="day_friday">Fri</string>
+    <string name="day_saturday">Sat</string>
+    <string name="day_sunday">Sun</string>
+    <string name="loading_schedule">Synchronizing airing schedule…</string>
+
+    <!-- Watchlist Screen -->
+    <string name="status_all">All</string>
+    <string name="status_watching">Watching</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_plan">Plan to Watch</string>
+    <string name="status_hold">On Hold</string>
+    <string name="status_dropped">Dropped</string>
+    <string name="empty_watchlist_title">Watchlist Empty</string>
+    <string name="empty_watchlist_subtitle">You haven\'t added any anime to this status yet. Tap bookmark on an anime to track it!</string>
+    <string name="label_total_watch_time">Total Watch Time</string>
+    <string name="label_episodes">Episodes</string>
+    <string name="label_score">Score</string>
+    <string name="action_delete">Remove</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Watch Time Analytics</string>
+    <string name="stats_total_hours">Total Hours</string>
+    <string name="stats_completed_titles">Completed</string>
+    <string name="stats_watching_titles">Watching</string>
+    <string name="stats_episodes_watched">Episodes Watched</string>
+    <string name="stats_status_distribution">Watch Status Distribution</string>
+    <string name="stats_format_breakdown">Top Formats</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_guest_user">Guest User</string>
+    <string name="profile_not_logged_in">Not logged in</string>
+    <string name="profile_enthusiast">Anime Tracker Enthusiast</string>
+    <string name="profile_menu_heading">Menu &amp; Settings</string>
+    <string name="profile_app_settings">App Settings</string>
+    <string name="profile_edit_info">Edit Profile Info</string>
+    <string name="profile_share">Share My Profile</string>
+    <string name="profile_about">About AniDex</string>
+    <string name="profile_logout">Log Out of Account</string>
+    <string name="profile_share_toast">Sharing your anime watch statistics!</string>
+
+    <!-- Edit Profile Screen -->
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_saving">Saving…</string>
+    <string name="section_profile_photo">Profile Picture</string>
+    <string name="btn_upload_gallery">Upload from Gallery</string>
+    <string name="subtitle_upload_gallery">Pick your favorite anime image from device storage</string>
+    <string name="section_avatar_presets">Mascot Avatar Presets</string>
+    <string name="label_username">Username</string>
+    <string name="hint_username">Enter your display name</string>
+    <string name="label_bio">Short Bio</string>
+    <string name="hint_bio">Write a short bio about yourself</string>
+    <string name="section_account_info">Registered Account Info</string>
+    <string name="account_email">Email Account</string>
+    <string name="account_status">Account Status</string>
+    <string name="account_role">User Role</string>
+    <string name="account_role_val">Standard Member</string>
+    <string name="account_active">Active &amp; Verified</string>
+    <string name="msg_profile_saved">Profile saved successfully!</string>
+    <string name="msg_photo_selected">Profile picture selected!</string>
+    <string name="msg_name_empty">Name cannot be empty</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_notifications">Notifications</string>
+    <string name="settings_notif_new_episodes">New Episode Releases</string>
+    <string name="settings_notif_new_episodes_sub">Instant notifications when your watched anime airs</string>
+    <string name="settings_notif_today_schedule">Today\'s Airing Schedule</string>
+    <string name="settings_notif_today_schedule_sub">Daily morning summary of anime broadcast</string>
+    <string name="settings_section_appearance">Appearance &amp; Language</string>
+    <string name="settings_dark_mode">Auto Dark Theme</string>
+    <string name="settings_dark_mode_sub">AMOLED Pure Black theme with Fox Mascot accents</string>
+    <string name="settings_language">App Language</string>
+    <string name="dialog_select_language">Select Language</string>
+    <string name="settings_section_storage">Storage &amp; Cache</string>
+    <string name="settings_clear_cache">Clear Image Cache</string>
+    <string name="settings_clear_cache_sub">Free up disk storage used by anime posters</string>
+    <string name="msg_cache_cleared">Image cache cleared successfully!</string>
+    <string name="settings_section_about">About AniDex</string>
+    <string name="settings_version">Application Version</string>
+    <string name="settings_developer">Developer &amp; Engine</string>
+    <string name="settings_engine_val">Google DeepMind Jetpack Compose Engine</string>
+
+    <!-- Anime Detail Screen -->
+    <string name="detail_score">Score</string>
+    <string name="detail_episodes">Episodes</string>
+    <string name="detail_rank">Rank</string>
+    <string name="detail_popularity">Popularity</string>
+    <string name="detail_status">Status</string>
+    <string name="detail_format">Format</string>
+    <string name="detail_duration">Duration</string>
+    <string name="detail_season_year">Season / Year</string>
+    <string name="detail_broadcast">Broadcast</string>
+    <string name="detail_synopsis">Synopsis</string>
+    <string name="detail_read_more">Read More</string>
+    <string name="detail_show_less">Show Less</string>
+    <string name="detail_add_to_watchlist">Add to Watchlist</string>
+    <string name="detail_in_watchlist">In Watchlist</string>
+    <string name="detail_specs">Additional Information</string>
+
+    <!-- Auth -->
+    <string name="login_title">Welcome to AniDex</string>
+    <string name="login_subtitle">Log in to sync your anime watchlist and statistics</string>
+    <string name="login_email_hint">Email address</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_btn">Sign In</string>
+    <string name="login_guest_btn">Continue as Guest</string>
+    <string name="login_forgot_password">Forgot password?</string>
+    <string name="login_no_account">Don\'t have an account? Sign Up</string>
+    <string name="register_title">Create AniDex Account</string>
+    <string name="register_name_hint">Display name</string>
+    <string name="register_btn">Sign Up</string>
+    <string name="register_has_account">Already have an account? Sign In</string>
+    <string name="forgot_password_title">Reset Password</string>
+    <string name="forgot_password_btn">Send Reset Link</string>
 </resources>

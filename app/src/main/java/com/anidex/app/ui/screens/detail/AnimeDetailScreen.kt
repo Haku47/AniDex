@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -53,10 +54,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import coil.compose.AsyncImage
 import com.anidex.app.domain.model.WatchStatus
 import com.anidex.app.ui.components.ErrorState
@@ -134,7 +137,8 @@ fun AnimeDetailScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 40.dp, start = 16.dp, end = 16.dp),
+                            .statusBarsPadding()
+                            .padding(top = 10.dp, start = 16.dp, end = 16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -273,7 +277,7 @@ fun AnimeDetailScreen(
                                 ) {
                                     Icon(imageVector = Icons.Default.Bookmark, contentDescription = null, tint = Color.White)
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text(text = "Tambahkan ke Watchlist", fontWeight = FontWeight.Bold, color = Color.White)
+                                    Text(text = stringResource(R.string.detail_add_to_watchlist), fontWeight = FontWeight.Bold, color = Color.White)
                                 }
                             } else {
                                 Row(
@@ -368,7 +372,7 @@ fun AnimeDetailScreen(
 
                     // Synopsis
                     Text(
-                        text = "Sinopsis",
+                        text = stringResource(R.string.detail_synopsis),
                         fontWeight = FontWeight.Bold,
                         fontSize = 17.sp,
                         color = TextPrimary
@@ -386,7 +390,7 @@ fun AnimeDetailScreen(
                     )
 
                     Text(
-                        text = if (isSynopsisExpanded) "Tampilkan Lebih Sedikit" else "Baca Selengkapnya",
+                        text = if (isSynopsisExpanded) stringResource(R.string.detail_show_less) else stringResource(R.string.detail_read_more),
                         color = BrandBlue,
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp,
@@ -399,7 +403,7 @@ fun AnimeDetailScreen(
 
                     // Anime Specifications Grid
                     Text(
-                        text = "Informasi Tambahan",
+                        text = stringResource(R.string.detail_specs),
                         fontWeight = FontWeight.Bold,
                         fontSize = 17.sp,
                         color = TextPrimary

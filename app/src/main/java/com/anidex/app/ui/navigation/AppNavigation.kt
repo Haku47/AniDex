@@ -1,6 +1,7 @@
 package com.anidex.app.ui.navigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,6 +37,7 @@ import com.anidex.app.ui.screens.detail.AnimeDetailViewModel
 import com.anidex.app.ui.screens.discover.DiscoverScreen
 import com.anidex.app.ui.screens.discover.DiscoverViewModel
 import com.anidex.app.ui.screens.onboarding.OnboardingScreen
+import com.anidex.app.ui.screens.profile.EditProfileScreen
 import com.anidex.app.ui.screens.profile.ProfileScreen
 import com.anidex.app.ui.screens.profile.ProfileViewModel
 import com.anidex.app.ui.screens.schedule.ScheduleScreen
@@ -67,6 +70,7 @@ fun MainAppScaffold(
             .fillMaxSize()
             .background(DeepBackground),
         containerColor = DeepBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             if (showBottomBar) {
                 androidx.compose.foundation.layout.Column {
@@ -101,7 +105,7 @@ fun MainAppScaffold(
                                 },
                                 label = {
                                     Text(
-                                        text = screen.title,
+                                        text = if (screen.titleRes != 0) stringResource(screen.titleRes) else screen.title,
                                         fontSize = 10.sp
                                     )
                                 },
@@ -118,11 +122,11 @@ fun MainAppScaffold(
                 }
             }
         }
-    ) { innerPadding ->
+    ) { _ ->
         NavHost(
             navController = navController,
             startDestination = Screen.Splash.route,
-            modifier = Modifier.padding(if (showBottomBar) innerPadding else androidx.compose.foundation.layout.PaddingValues(0.dp))
+            modifier = Modifier.fillMaxSize()
         ) {
             // 1. Splash Screen
             composable(Screen.Splash.route) {
@@ -230,7 +234,16 @@ fun MainAppScaffold(
                 val viewModel: ProfileViewModel = hiltViewModel()
                 ProfileScreen(
                     viewModel = viewModel,
-                    onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
+                    onNavigateToEditProfile = {
+                        navController.navigate(Screen.EditProfile.route) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onNavigateToSettings = {
+                        navController.navigate(Screen.Settings.route) {
+                            launchSingleTop = true
+                        }
+                    },
                     onNavigateToLogin = {
                         navController.navigate(Screen.Login.route) {
                             popUpTo(0) { inclusive = true }
@@ -254,6 +267,14 @@ fun MainAppScaffold(
             // 12. Secondary: Settings Screen
             composable(Screen.Settings.route) {
                 SettingsScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+
+            // 13. Secondary: Edit Profile Screen
+            composable(Screen.EditProfile.route) {
+                EditProfileScreen(
+                    authRepository = authRepository,
                     onNavigateBack = { navController.popBackStack() }
                 )
             }

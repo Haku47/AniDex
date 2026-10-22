@@ -78,6 +78,59 @@ class AnimeRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getTrendingAnime(limit: Int): Resource<List<Anime>> {
+        return withContext(dispatchers.io) {
+            try {
+                val safeLimit = limit.coerceIn(1, 20)
+                val response = api.getTrendingAnime(limit = safeLimit)
+                val domainList = response.data.map { it.toDomain() }
+                if (domainList.isNotEmpty()) {
+                    animeDao.insertAnimes(domainList.map { it.toEntity() })
+                    Resource.Success(domainList)
+                } else {
+                    getTopAnime(1, limit)
+                }
+            } catch (e: Exception) {
+                getTopAnime(1, limit)
+            }
+        }
+    }
+
+    override suspend fun getTopRatedAnime(page: Int, limit: Int): Resource<List<Anime>> {
+        return withContext(dispatchers.io) {
+            try {
+                val safeLimit = limit.coerceIn(1, 20)
+                val offset = (page - 1) * safeLimit
+                val response = api.getTopRatedAnime(limit = safeLimit, offset = offset)
+                val domainList = response.data.map { it.toDomain() }
+                if (domainList.isNotEmpty()) {
+                    animeDao.insertAnimes(domainList.map { it.toEntity() })
+                }
+                Resource.Success(domainList)
+            } catch (e: Exception) {
+                Resource.Error("Gagal memuat anime rating tertinggi: ${e.localizedMessage}", e)
+            }
+        }
+    }
+
+    override suspend fun getAnimeByCategory(category: String, page: Int, limit: Int): Resource<List<Anime>> {
+        return withContext(dispatchers.io) {
+            try {
+                val safeLimit = limit.coerceIn(1, 20)
+                val offset = (page - 1) * safeLimit
+                val response = api.getAnimeByCategory(
+                    category = category.lowercase(),
+                    limit = safeLimit,
+                    offset = offset
+                )
+                val domainList = response.data.map { it.toDomain() }
+                Resource.Success(domainList)
+            } catch (e: Exception) {
+                Resource.Error("Gagal memuat anime genre $category: ${e.localizedMessage}", e)
+            }
+        }
+    }
+
     override suspend fun getSeasonalAnime(year: Int, season: String, page: Int): Resource<List<Anime>> {
         return withContext(dispatchers.io) {
             try {
@@ -93,7 +146,6 @@ class AnimeRepositoryImpl @Inject constructor(
     override suspend fun getAiringSchedules(dayOfWeek: String?): Resource<List<Anime>> {
         return withContext(dispatchers.io) {
             try {
-                // Fetch currently airing anime (Kitsu max limit = 20)
                 val response = api.getAiringAnime(status = "current", limit = 20)
                 val list = response.data.map { it.toDomain() }
                 Resource.Success(list)
