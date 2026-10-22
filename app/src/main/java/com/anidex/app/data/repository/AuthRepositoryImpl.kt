@@ -35,14 +35,25 @@ class AuthRepositoryImpl @Inject constructor(
         val savedName = prefs.getString("user_name", null)
         if (!savedEmail.isNullOrBlank() && !savedName.isNullOrBlank()) {
             _currentUser.value = User(
-                id = "usr_1",
+                id = prefs.getString("user_id", "usr_1") ?: "usr_1",
                 name = savedName,
                 email = savedEmail,
-                avatarUrl = null,
-                bio = prefs.getString("user_bio", "Otaku & Anime Collector") ?: "",
+                avatarUrl = prefs.getString("user_avatar", null),
+                bio = prefs.getString("user_bio", "Otaku & Anime Collector") ?: "Otaku & Anime Collector",
                 joinedDate = prefs.getString("user_joined", "Oktober 2026") ?: "Oktober 2026"
             )
         }
+    }
+
+    private fun saveUserToPrefs(user: User) {
+        prefs.edit()
+            .putString("user_id", user.id)
+            .putString("user_name", user.name)
+            .putString("user_email", user.email)
+            .putString("user_avatar", user.avatarUrl)
+            .putString("user_bio", user.bio)
+            .putString("user_joined", user.joinedDate)
+            .apply()
     }
 
     override suspend fun login(email: String, pass: String): Resource<User> {
@@ -67,13 +78,7 @@ class AuthRepositoryImpl @Inject constructor(
             joinedDate = "Oktober 2026"
         )
 
-        prefs.edit()
-            .putString("user_email", user.email)
-            .putString("user_name", user.name)
-            .putString("user_bio", user.bio)
-            .putString("user_joined", user.joinedDate)
-            .apply()
-
+        saveUserToPrefs(user)
         _currentUser.value = user
         return Resource.Success(user)
     }
@@ -97,15 +102,23 @@ class AuthRepositoryImpl @Inject constructor(
             joinedDate = "Oktober 2026"
         )
 
-        prefs.edit()
-            .putString("user_email", user.email)
-            .putString("user_name", user.name)
-            .putString("user_bio", user.bio)
-            .putString("user_joined", user.joinedDate)
-            .apply()
-
+        saveUserToPrefs(user)
         _currentUser.value = user
         return Resource.Success(user)
+    }
+
+    override suspend fun loginAsGuest(): Resource<User> {
+        val guest = User(
+            id = "guest_${System.currentTimeMillis() % 1000}",
+            name = "Pengguna Tamu",
+            email = "tamu@anidex.app",
+            avatarUrl = null,
+            bio = "Penjelajah & Pelacak Anime Baru",
+            joinedDate = "Oktober 2026"
+        )
+        saveUserToPrefs(guest)
+        _currentUser.value = guest
+        return Resource.Success(guest)
     }
 
     override suspend fun forgotPassword(email: String): Resource<String> {
@@ -118,22 +131,30 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun logout() {
         prefs.edit()
+            .remove("user_id")
             .remove("user_email")
             .remove("user_name")
+            .remove("user_avatar")
             .remove("user_bio")
+            .remove("user_joined")
             .apply()
         _currentUser.value = null
     }
 
-    override suspend fun updateProfile(name: String, bio: String): Resource<User> {
-        val current = _currentUser.value ?: return Resource.Error("Sesi tidak ditemukan.")
-        val updated = current.copy(name = name, bio = bio)
-        prefs.edit()
-            .putString("user_name", updated.name)
-            .putString("user_bio", updated.bio)
-            .apply()
+    override suspend fun updateProfile(name: String, bio: String, avatarUrl: String?): Resource<User> {
+        val current = _currentUser.value ?: return Resource.Error("Sesi pengguna tidak ditemukan.")
+        if (name.isBlank()) {
+            return Resource.Error("Nama profil tidak boleh kosong.")
+        }
+
+        val updated = current.copy(
+            name = name.trim(),
+            bio = bio.trim(),
+            avatarUrl = avatarUrl ?: current.avatarUrl
+        )
+
+        saveUserToPrefs(updated)
         _currentUser.value = updated
         return Resource.Success(updated)
     }
 }
-

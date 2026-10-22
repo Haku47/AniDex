@@ -60,6 +60,22 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun loginAsGuest(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            when (val result = authRepository.loginAsGuest()) {
+                is Resource.Success -> {
+                    _uiState.update { it.copy(isLoading = false, successUser = result.data) }
+                    onSuccess()
+                }
+                is Resource.Error -> {
+                    _uiState.update { it.copy(isLoading = false, errorMessage = result.message) }
+                }
+                else -> Unit
+            }
+        }
+    }
+
     fun forgotPassword(email: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null, infoMessage = null) }
@@ -79,4 +95,3 @@ class AuthViewModel @Inject constructor(
         _uiState.update { it.copy(errorMessage = null, infoMessage = null) }
     }
 }
-

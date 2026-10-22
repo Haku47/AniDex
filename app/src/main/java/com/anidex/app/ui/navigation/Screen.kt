@@ -68,6 +68,7 @@ sealed class Screen(
     }
 
     data object Settings : Screen(route = "settings")
+    data object EditProfile : Screen(route = "edit_profile")
 }
 
 val BottomNavItems = listOf(

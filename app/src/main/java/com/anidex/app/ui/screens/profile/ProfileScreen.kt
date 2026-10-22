@@ -1,9 +1,7 @@
 package com.anidex.app.ui.screens.profile
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,14 +23,14 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Logout
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,17 +39,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.anidex.app.R
 import com.anidex.app.domain.model.WatchStatus
+import com.anidex.app.ui.components.UserAvatarDisplay
 import com.anidex.app.ui.theme.BrandBlue
 import com.anidex.app.ui.theme.BrandCyan
 import com.anidex.app.ui.theme.BrandOrange
@@ -67,6 +62,7 @@ fun ProfileScreen(
     viewModel: ProfileViewModel,
     onNavigateToSettings: () -> Unit,
     onNavigateToLogin: () -> Unit,
+    onNavigateToEditProfile: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -89,60 +85,108 @@ fun ProfileScreen(
             shape = RoundedCornerShape(18.dp),
             colors = CardDefaults.cardColors(containerColor = SurfaceDark)
         ) {
-            Column(
-                modifier = Modifier.padding(18.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                // Centered Avatar Badge with Dual Brand Gradient Ring
-                Box(
+            Box(modifier = Modifier.fillMaxWidth()) {
+                // Top Edit Icon Button
+                IconButton(
+                    onClick = onNavigateToEditProfile,
                     modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF000000))
-                        .border(
-                            width = 2.5.dp,
-                            brush = Brush.linearGradient(listOf(BrandOrange, BrandBlue)),
-                            shape = CircleShape
-                        ),
-                    contentAlignment = Alignment.Center
+                        .align(Alignment.TopEnd)
+                        .padding(8.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo_anidex),
-                        contentDescription = "User Avatar",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .size(76.dp)
-                            .clip(CircleShape)
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit Profil",
+                        tint = BrandOrange,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    text = user?.name ?: "Pengguna Tamu",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    color = TextPrimary
-                )
-
-                Text(
-                    text = user?.email ?: "Belum masuk akun",
-                    fontSize = 12.sp,
-                    color = TextSecondary
-                )
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = SurfaceVariantDark
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(18.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    // Avatar Display with Click to Edit
+                    Box(
+                        modifier = Modifier
+                            .clickable { onNavigateToEditProfile() },
+                        contentAlignment = Alignment.BottomEnd
+                    ) {
+                        UserAvatarDisplay(
+                            avatarKeyOrUrl = user?.avatarUrl,
+                            size = 100.dp,
+                            borderWidth = 2.5.dp
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .size(28.dp)
+                                .clip(CircleShape)
+                                .background(BrandOrange),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Edit Avatar",
+                                tint = Color.White,
+                                modifier = Modifier.size(15.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
                     Text(
-                        text = user?.bio ?: "Anime Tracker Enthusiast",
-                        fontSize = 11.sp,
-                        color = BrandCyan,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        text = user?.name ?: "Pengguna Tamu",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = TextPrimary
                     )
+
+                    Text(
+                        text = user?.email ?: "Belum masuk akun",
+                        fontSize = 12.sp,
+                        color = TextSecondary
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Surface(
+                        shape = RoundedCornerShape(6.dp),
+                        color = SurfaceVariantDark
+                    ) {
+                        Text(
+                            text = user?.bio ?: "Anime Tracker Enthusiast",
+                            fontSize = 11.sp,
+                            color = BrandCyan,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    // Edit Profile Quick Button
+                    Button(
+                        onClick = onNavigateToEditProfile,
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantDark),
+                        modifier = Modifier.height(34.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = null,
+                            tint = BrandOrange,
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "Edit Informasi Profil",
+                            fontSize = 12.sp,
+                            color = TextPrimary,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
                 }
             }
         }
@@ -196,16 +240,14 @@ fun ProfileScreen(
         ) {
             Column {
                 ProfileMenuItem(
+                    icon = Icons.Default.Edit,
+                    label = "Edit Informasi Profil",
+                    onClick = onNavigateToEditProfile
+                )
+                ProfileMenuItem(
                     icon = Icons.Default.Settings,
                     label = "Pengaturan Aplikasi",
                     onClick = onNavigateToSettings
-                )
-                ProfileMenuItem(
-                    icon = Icons.Default.Edit,
-                    label = "Edit Informasi Profil",
-                    onClick = {
-                        Toast.makeText(context, "Fitur edit profil siap digunakan", Toast.LENGTH_SHORT).show()
-                    }
                 )
                 ProfileMenuItem(
                     icon = Icons.Default.Share,
@@ -305,4 +347,3 @@ private fun ProfileMenuItem(
         Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = TextSecondary, modifier = Modifier.size(18.dp))
     }
 }
-

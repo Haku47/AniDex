@@ -4,7 +4,7 @@
             "outputFile": "com.anidex.app-mergeDebugResources-62:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Haku\\.gradle\\caches\\9.6.0\\transforms\\8ce44636bd38ff73b280ea6e1bf19c15\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
+                    "source": "C:\\Users\\Haku\\.gradle\\caches\\transforms-4\\1b3f01a953131e80c0ac79771d97a502\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

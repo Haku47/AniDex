@@ -71,7 +71,7 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onNavigateToRegister: () -> Unit,
     onNavigateToForgotPassword: () -> Unit,
-    onGuestLogin: () -> Unit
+    onGuestLogin: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsState()
     var email by remember { mutableStateOf("") }
@@ -228,7 +228,13 @@ fun LoginScreen(
 
         // Guest Login Button
         OutlinedButton(
-            onClick = onGuestLogin,
+            onClick = {
+                viewModel.loginAsGuest {
+                    onLoginSuccess()
+                    onGuestLogin()
+                }
+            },
+            enabled = !state.isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
@@ -256,4 +262,3 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(32.dp))
     }
 }
-

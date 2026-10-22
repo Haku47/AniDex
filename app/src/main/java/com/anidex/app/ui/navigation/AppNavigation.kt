@@ -35,6 +35,7 @@ import com.anidex.app.ui.screens.detail.AnimeDetailViewModel
 import com.anidex.app.ui.screens.discover.DiscoverScreen
 import com.anidex.app.ui.screens.discover.DiscoverViewModel
 import com.anidex.app.ui.screens.onboarding.OnboardingScreen
+import com.anidex.app.ui.screens.profile.EditProfileScreen
 import com.anidex.app.ui.screens.profile.ProfileScreen
 import com.anidex.app.ui.screens.profile.ProfileViewModel
 import com.anidex.app.ui.screens.schedule.ScheduleScreen
@@ -159,12 +160,7 @@ fun MainAppScaffold(
                         }
                     },
                     onNavigateToRegister = { navController.navigate(Screen.Register.route) },
-                    onNavigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
-                    onGuestLogin = {
-                        navController.navigate(Screen.Discover.route) {
-                            popUpTo(Screen.Login.route) { inclusive = true }
-                        }
-                    }
+                    onNavigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) }
                 )
             }
 
@@ -235,11 +231,23 @@ fun MainAppScaffold(
                         navController.navigate(Screen.Login.route) {
                             popUpTo(0) { inclusive = true }
                         }
+                    },
+                    onNavigateToEditProfile = {
+                        navController.navigate(Screen.EditProfile.route)
                     }
                 )
             }
 
-            // 11. Secondary: Anime Detail Screen
+            // 11. Secondary: Edit Profile Screen
+            composable(Screen.EditProfile.route) {
+                val viewModel: ProfileViewModel = hiltViewModel()
+                EditProfileScreen(
+                    viewModel = viewModel,
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+
+            // 12. Secondary: Anime Detail Screen
             composable(
                 route = Screen.AnimeDetail.route,
                 arguments = listOf(navArgument("animeId") { type = NavType.IntType })
@@ -251,7 +259,7 @@ fun MainAppScaffold(
                 )
             }
 
-            // 12. Secondary: Settings Screen
+            // 13. Secondary: Settings Screen
             composable(Screen.Settings.route) {
                 SettingsScreen(
                     onNavigateBack = { navController.popBackStack() }
