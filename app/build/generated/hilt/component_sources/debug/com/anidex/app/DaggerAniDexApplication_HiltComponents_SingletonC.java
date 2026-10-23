@@ -436,22 +436,19 @@ public final class DaggerAniDexApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_anidex_app_ui_screens_watchlist_WatchlistViewModel = "com.anidex.app.ui.screens.watchlist.WatchlistViewModel";
-
       static String com_anidex_app_ui_screens_stats_StatsViewModel = "com.anidex.app.ui.screens.stats.StatsViewModel";
 
       static String com_anidex_app_ui_screens_auth_AuthViewModel = "com.anidex.app.ui.screens.auth.AuthViewModel";
 
       static String com_anidex_app_ui_screens_profile_ProfileViewModel = "com.anidex.app.ui.screens.profile.ProfileViewModel";
 
-      static String com_anidex_app_ui_screens_detail_AnimeDetailViewModel = "com.anidex.app.ui.screens.detail.AnimeDetailViewModel";
+      static String com_anidex_app_ui_screens_watchlist_WatchlistViewModel = "com.anidex.app.ui.screens.watchlist.WatchlistViewModel";
 
       static String com_anidex_app_ui_screens_discover_DiscoverViewModel = "com.anidex.app.ui.screens.discover.DiscoverViewModel";
 
-      static String com_anidex_app_ui_screens_schedule_ScheduleViewModel = "com.anidex.app.ui.screens.schedule.ScheduleViewModel";
+      static String com_anidex_app_ui_screens_detail_AnimeDetailViewModel = "com.anidex.app.ui.screens.detail.AnimeDetailViewModel";
 
-      @KeepFieldType
-      WatchlistViewModel com_anidex_app_ui_screens_watchlist_WatchlistViewModel2;
+      static String com_anidex_app_ui_screens_schedule_ScheduleViewModel = "com.anidex.app.ui.screens.schedule.ScheduleViewModel";
 
       @KeepFieldType
       StatsViewModel com_anidex_app_ui_screens_stats_StatsViewModel2;
@@ -463,10 +460,13 @@ public final class DaggerAniDexApplication_HiltComponents_SingletonC {
       ProfileViewModel com_anidex_app_ui_screens_profile_ProfileViewModel2;
 
       @KeepFieldType
-      AnimeDetailViewModel com_anidex_app_ui_screens_detail_AnimeDetailViewModel2;
+      WatchlistViewModel com_anidex_app_ui_screens_watchlist_WatchlistViewModel2;
 
       @KeepFieldType
       DiscoverViewModel com_anidex_app_ui_screens_discover_DiscoverViewModel2;
+
+      @KeepFieldType
+      AnimeDetailViewModel com_anidex_app_ui_screens_detail_AnimeDetailViewModel2;
 
       @KeepFieldType
       ScheduleViewModel com_anidex_app_ui_screens_schedule_ScheduleViewModel2;
@@ -542,37 +542,37 @@ public final class DaggerAniDexApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_anidex_app_ui_screens_profile_ProfileViewModel = "com.anidex.app.ui.screens.profile.ProfileViewModel";
-
-      static String com_anidex_app_ui_screens_auth_AuthViewModel = "com.anidex.app.ui.screens.auth.AuthViewModel";
-
-      static String com_anidex_app_ui_screens_schedule_ScheduleViewModel = "com.anidex.app.ui.screens.schedule.ScheduleViewModel";
-
       static String com_anidex_app_ui_screens_stats_StatsViewModel = "com.anidex.app.ui.screens.stats.StatsViewModel";
-
-      static String com_anidex_app_ui_screens_watchlist_WatchlistViewModel = "com.anidex.app.ui.screens.watchlist.WatchlistViewModel";
 
       static String com_anidex_app_ui_screens_detail_AnimeDetailViewModel = "com.anidex.app.ui.screens.detail.AnimeDetailViewModel";
 
+      static String com_anidex_app_ui_screens_auth_AuthViewModel = "com.anidex.app.ui.screens.auth.AuthViewModel";
+
+      static String com_anidex_app_ui_screens_profile_ProfileViewModel = "com.anidex.app.ui.screens.profile.ProfileViewModel";
+
+      static String com_anidex_app_ui_screens_watchlist_WatchlistViewModel = "com.anidex.app.ui.screens.watchlist.WatchlistViewModel";
+
+      static String com_anidex_app_ui_screens_schedule_ScheduleViewModel = "com.anidex.app.ui.screens.schedule.ScheduleViewModel";
+
       static String com_anidex_app_ui_screens_discover_DiscoverViewModel = "com.anidex.app.ui.screens.discover.DiscoverViewModel";
-
-      @KeepFieldType
-      ProfileViewModel com_anidex_app_ui_screens_profile_ProfileViewModel2;
-
-      @KeepFieldType
-      AuthViewModel com_anidex_app_ui_screens_auth_AuthViewModel2;
-
-      @KeepFieldType
-      ScheduleViewModel com_anidex_app_ui_screens_schedule_ScheduleViewModel2;
 
       @KeepFieldType
       StatsViewModel com_anidex_app_ui_screens_stats_StatsViewModel2;
 
       @KeepFieldType
+      AnimeDetailViewModel com_anidex_app_ui_screens_detail_AnimeDetailViewModel2;
+
+      @KeepFieldType
+      AuthViewModel com_anidex_app_ui_screens_auth_AuthViewModel2;
+
+      @KeepFieldType
+      ProfileViewModel com_anidex_app_ui_screens_profile_ProfileViewModel2;
+
+      @KeepFieldType
       WatchlistViewModel com_anidex_app_ui_screens_watchlist_WatchlistViewModel2;
 
       @KeepFieldType
-      AnimeDetailViewModel com_anidex_app_ui_screens_detail_AnimeDetailViewModel2;
+      ScheduleViewModel com_anidex_app_ui_screens_schedule_ScheduleViewModel2;
 
       @KeepFieldType
       DiscoverViewModel com_anidex_app_ui_screens_discover_DiscoverViewModel2;

@@ -99,7 +99,7 @@ fun MainAppScaffold(
                                         val icon = if (selected) selIcon else screen.unselectedIcon ?: selIcon
                                         Icon(
                                             imageVector = icon,
-                                            contentDescription = screen.title
+                                            contentDescription = if (screen.titleRes != 0) stringResource(screen.titleRes) else screen.title
                                         )
                                     }
                                 },
@@ -163,12 +163,7 @@ fun MainAppScaffold(
                         }
                     },
                     onNavigateToRegister = { navController.navigate(Screen.Register.route) },
-                    onNavigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
-                    onGuestLogin = {
-                        navController.navigate(Screen.Discover.route) {
-                            popUpTo(Screen.Login.route) { inclusive = true }
-                        }
-                    }
+                    onNavigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) }
                 )
             }
 

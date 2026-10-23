@@ -33,7 +33,7 @@ class AnimeRepositoryImpl @Inject constructor(
                     if (cached != null) {
                         Resource.Success(cached)
                     } else {
-                        Resource.Error("Anime dengan ID $animeId tidak ditemukan.")
+                        Resource.Error("Anime with ID $animeId not found.")
                     }
                 }
             } catch (e: HttpException) {
@@ -48,10 +48,10 @@ class AnimeRepositoryImpl @Inject constructor(
                 if (cached != null) {
                     Resource.Success(cached)
                 } else {
-                    Resource.Error("Koneksi jaringan terputus. Menampilkan data lokal jika ada.", e)
+                    Resource.Error("Network disconnected. Showing local cached data if available.", e)
                 }
             } catch (e: Exception) {
-                Resource.Error("Terjadi kesalahan: ${e.localizedMessage ?: "Unknown error"}", e)
+                Resource.Error("An error occurred: ${e.localizedMessage ?: "Unknown error"}", e)
             }
         }
     }
@@ -71,9 +71,9 @@ class AnimeRepositoryImpl @Inject constructor(
             } catch (e: HttpException) {
                 Resource.Error("API error HTTP ${e.code()}: ${e.message()}", e)
             } catch (e: IOException) {
-                Resource.Error("Gagal terhubung ke API anime. Periksa koneksi internet.", e)
+                Resource.Error("Failed to connect to anime service. Please check your internet connection.", e)
             } catch (e: Exception) {
-                Resource.Error("Gagal memuat anime populer: ${e.localizedMessage}", e)
+                Resource.Error("Failed to load trending anime: ${e.localizedMessage}", e)
             }
         }
     }
@@ -108,7 +108,7 @@ class AnimeRepositoryImpl @Inject constructor(
                 }
                 Resource.Success(domainList)
             } catch (e: Exception) {
-                Resource.Error("Gagal memuat anime rating tertinggi: ${e.localizedMessage}", e)
+                Resource.Error("Failed to load top rated anime: ${e.localizedMessage}", e)
             }
         }
     }
@@ -126,7 +126,7 @@ class AnimeRepositoryImpl @Inject constructor(
                 val domainList = response.data.map { it.toDomain() }
                 Resource.Success(domainList)
             } catch (e: Exception) {
-                Resource.Error("Gagal memuat anime genre $category: ${e.localizedMessage}", e)
+                Resource.Error("Failed to load anime for category $category: ${e.localizedMessage}", e)
             }
         }
     }
@@ -138,7 +138,7 @@ class AnimeRepositoryImpl @Inject constructor(
                 val list = response.data.map { it.toDomain() }
                 Resource.Success(list)
             } catch (e: Exception) {
-                Resource.Error("Gagal memuat seasonal anime: ${e.localizedMessage}", e)
+                Resource.Error("Failed to load seasonal anime: ${e.localizedMessage}", e)
             }
         }
     }
@@ -150,9 +150,9 @@ class AnimeRepositoryImpl @Inject constructor(
                 val list = response.data.map { it.toDomain() }
                 Resource.Success(list)
             } catch (e: HttpException) {
-                Resource.Error("Gagal memuat jadwal tayang (HTTP ${e.code()}): ${e.message()}", e)
+                Resource.Error("Failed to load schedule (HTTP ${e.code()}): ${e.message()}", e)
             } catch (e: Exception) {
-                Resource.Error("Gagal memuat jadwal anime tayang: ${e.localizedMessage}", e)
+                Resource.Error("Failed to load airing anime schedule: ${e.localizedMessage}", e)
             }
         }
     }
@@ -164,7 +164,7 @@ class AnimeRepositoryImpl @Inject constructor(
                 val list = response.data.map { it.toDomain() }
                 Resource.Success(list)
             } catch (e: Exception) {
-                Resource.Error("Gagal mencari anime '$query': ${e.localizedMessage}", e)
+                Resource.Error("Failed to search anime '$query': ${e.localizedMessage}", e)
             }
         }
     }

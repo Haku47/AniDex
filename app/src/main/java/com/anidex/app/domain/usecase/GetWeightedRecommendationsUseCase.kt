@@ -59,7 +59,7 @@ class GetWeightedRecommendationsUseCase @Inject constructor(
                     matchPercentage = ((anime.score ?: 7.5) * 10).roundToInt().coerceIn(70, 99),
                     matchedGenres = anime.genres.map { it.name }.take(2),
                     matchedStudios = anime.studios.map { it.name },
-                    reasonDescription = "Sangat populer dan memiliki rating tinggi di komunitas anime."
+                    reasonDescription = "Highly popular with top ratings in the anime community."
                 )
             }
         }
@@ -156,10 +156,10 @@ class GetWeightedRecommendationsUseCase @Inject constructor(
         matchedStudios: List<String>
     ): String {
         return buildString {
-            append("Direkomendasikan karena kamu menyukai genre ")
+            append("Recommended because you like the ")
             append(matchedGenres.take(2).joinToString(" & "))
             if (matchedStudios.isNotEmpty()) {
-                append(" dari studio ")
+                append(" genre from studio ")
                 append(matchedStudios.first())
             }
             append(".")

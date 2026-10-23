@@ -102,26 +102,31 @@ fun StatsScreen(
 
                     val totalFormatMins = summary.minutesByFormat.values.sum().coerceAtLeast(1L)
                     val formats = listOf(
-                        AnimeFormat.TV to "Serial TV",
-                        AnimeFormat.MOVIE to "Film (Movie)",
-                        AnimeFormat.OVA to "OVA / Spesial",
-                        AnimeFormat.ONA to "ONA (Web)"
+                        AnimeFormat.TV,
+                        AnimeFormat.MOVIE,
+                        AnimeFormat.OVA,
+                        AnimeFormat.ONA
                     )
 
-                    for ((format, label) in formats) {
+                    for (format in formats) {
                         val formatMins = summary.minutesByFormat[format] ?: 0L
                         val percentage = (formatMins.toFloat() / totalFormatMins).coerceIn(0f, 1f)
                         val hours = formatMins / 60
                         val mins = formatMins % 60
+                        val timeStr = if (hours > 0) {
+                            stringResource(R.string.unit_time_h_m, hours, mins)
+                        } else {
+                            stringResource(R.string.unit_time_m, mins)
+                        }
 
                         Column(modifier = Modifier.padding(vertical = 6.dp)) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text(text = label, fontSize = 12.sp, color = TextPrimary, fontWeight = FontWeight.Medium)
+                                Text(text = stringResource(format.titleRes), fontSize = 12.sp, color = TextPrimary, fontWeight = FontWeight.Medium)
                                 Text(
-                                    text = "${hours}j ${mins}m (${(percentage * 100).toInt()}%)",
+                                    text = "$timeStr (${(percentage * 100).toInt()}%)",
                                     fontSize = 12.sp,
                                     color = TextSecondary
                                 )
@@ -173,9 +178,9 @@ fun StatsScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = status.displayName, fontSize = 13.sp, color = TextSecondary)
+                            Text(text = stringResource(status.titleRes), fontSize = 13.sp, color = TextSecondary)
                             Text(
-                                text = "$count Judul",
+                                text = stringResource(R.string.unit_titles, count),
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary

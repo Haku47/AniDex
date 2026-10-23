@@ -6,6 +6,6 @@ data class User(
     val email: String,
     val avatarUrl: String? = null,
     val bio: String = "Anime Enthusiast & Tracker",
-    val joinedDate: String = "Oktober 2026"
+    val joinedDate: String = "October 2026"
 )
 

@@ -41,7 +41,7 @@ object AnimeMapper {
     }
 
     fun cleanHtmlDescription(raw: String?): String {
-        if (raw.isNullOrBlank()) return "Tidak ada sinopsis tersedia."
+        if (raw.isNullOrBlank()) return ""
         return raw.replace(Regex("<[^>]*>"), "").trim()
     }
 
@@ -159,7 +159,7 @@ object AnimeMapper {
             id = malId,
             title = title,
             englishTitle = titleEnglish,
-            synopsis = synopsis ?: "No synopsis available.",
+            synopsis = synopsis ?: "",
             imageUrl = images?.webp?.largeImageUrl ?: images?.jpg?.largeImageUrl ?: images?.jpg?.imageUrl ?: "",
             bannerUrl = images?.webp?.largeImageUrl ?: images?.jpg?.largeImageUrl,
             score = score,

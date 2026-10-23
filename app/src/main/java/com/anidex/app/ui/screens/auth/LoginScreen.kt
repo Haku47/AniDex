@@ -48,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -73,7 +74,7 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onNavigateToRegister: () -> Unit,
     onNavigateToForgotPassword: () -> Unit,
-    onGuestLogin: () -> Unit
+    onGuestLogin: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsState()
     var email by remember { mutableStateOf("") }
@@ -116,7 +117,7 @@ fun LoginScreen(
         )
 
         Text(
-            text = "Masuk untuk melanjutkan pelacakan anime",
+            text = stringResource(R.string.login_subtitle),
             fontSize = 13.sp,
             color = TextSecondary
         )
@@ -145,8 +146,8 @@ fun LoginScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it; viewModel.clearMessages() },
-            label = { Text("Email") },
-            placeholder = { Text("nama@email.com") },
+            label = { Text(stringResource(R.string.login_email_label)) },
+            placeholder = { Text(stringResource(R.string.login_email_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Email, contentDescription = null, tint = BrandOrange)
             },
@@ -170,8 +171,8 @@ fun LoginScreen(
         OutlinedTextField(
             value = password,
             onValueChange = { password = it; viewModel.clearMessages() },
-            label = { Text("Password") },
-            placeholder = { Text("Minimal 6 karakter") },
+            label = { Text(stringResource(R.string.login_password_label)) },
+            placeholder = { Text(stringResource(R.string.login_password_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription = null, tint = BrandBlue)
             },
@@ -205,7 +206,7 @@ fun LoginScreen(
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(onClick = onNavigateToForgotPassword) {
-                Text(text = "Lupa Password?", color = BrandOrange, fontSize = 13.sp)
+                Text(text = stringResource(R.string.login_forgot_password), color = BrandOrange, fontSize = 13.sp)
             }
         }
 
@@ -224,7 +225,7 @@ fun LoginScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
             } else {
-                Text(text = "Masuk", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
+                Text(text = stringResource(R.string.login_btn), fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
             }
         }
 
@@ -232,15 +233,21 @@ fun LoginScreen(
 
         // Guest Login Button
         OutlinedButton(
-            onClick = onGuestLogin,
+            onClick = {
+                viewModel.loginAsGuest {
+                    onLoginSuccess()
+                    onGuestLogin()
+                }
+            },
+            enabled = !state.isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = TextPrimary),
-            border = ButtonDefaults.outlinedButtonBorder.copy(brush = androidx.compose.ui.graphics.SolidColor(CardBorder))
+            border = ButtonDefaults.outlinedButtonBorder(!state.isLoading).copy(brush = androidx.compose.ui.graphics.SolidColor(CardBorder))
         ) {
-            Text(text = "Masuk sebagai Tamu", fontSize = 14.sp, color = TextSecondary)
+            Text(text = stringResource(R.string.login_guest_btn), fontSize = 14.sp, color = TextSecondary)
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -250,14 +257,13 @@ fun LoginScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "Belum memiliki akun?", color = TextSecondary, fontSize = 13.sp)
+            Text(text = stringResource(R.string.login_no_account_prompt), color = TextSecondary, fontSize = 13.sp)
             Spacer(modifier = Modifier.width(4.dp))
             TextButton(onClick = onNavigateToRegister) {
-                Text(text = "Daftar Sekarang", color = BrandBlue, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                Text(text = stringResource(R.string.login_register_now), color = BrandBlue, fontWeight = FontWeight.Bold, fontSize = 13.sp)
             }
         }
 
         Spacer(modifier = Modifier.height(32.dp))
     }
 }
-

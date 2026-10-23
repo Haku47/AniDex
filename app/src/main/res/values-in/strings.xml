@@ -142,20 +142,139 @@
     <string name="detail_in_watchlist">Dalam Watchlist</string>
     <string name="detail_specs">Informasi Tambahan</string>
 
+    <!-- Generic Actions & Labels -->
+    <string name="action_back">Kembali</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_apply">Gunakan</string>
+    <string name="action_retry">Coba Lagi</string>
+    <string name="action_mark_completed">Tandai Selesai</string>
+    <string name="action_minus_one">Kurang 1</string>
+    <string name="action_plus_one">Tambah 1</string>
+    <string name="plus_one_episode">+1 Episode</string>
+    <string name="loading_default">Memuat data anime…</string>
+    <string name="error_generic_title">Oops! Terjadi Masalah</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_tagline">Katalog, Pelacak &amp; Jadwal Anime Terlengkap</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_skip">Lewati</string>
+    <string name="onboarding_continue">Lanjutkan</string>
+    <string name="onboarding_start">Mulai Sekarang</string>
+    <string name="onboarding_title_1">Katalog Anime Tanpa Batas</string>
+    <string name="onboarding_sub_1">Temukan puluhan ribu judul anime terbaru, terpopuler, dan klasik lengkap dengan sinopsis, rating, dan metadata resmi.</string>
+    <string name="onboarding_title_2">Lacak Progres &amp; Jam Tonton</string>
+    <string name="onboarding_sub_2">Hitung otomatis akumulasi waktu tonton dalam hari, jam, dan menit. Perbarui progres episode hanya dengan satu sentuhan.</string>
+    <string name="onboarding_title_3">Rekomendasi Cerdas &amp; Jadwal Akurat</string>
+    <string name="onboarding_sub_3">Rekomendasi berbobot dari studio &amp; genre favoritmu, serta konversi jadwal rilis tayang otomatis ke zona waktu lokal HP-mu.</string>
+
     <!-- Auth -->
     <string name="login_title">Selamat Datang di AniDex</string>
-    <string name="login_subtitle">Masuk untuk sinkronisasi watchlist dan statistik animemu</string>
-    <string name="login_email_hint">Alamat email</string>
-    <string name="login_password_hint">Kata sandi</string>
+    <string name="login_subtitle">Masuk untuk melanjutkan pelacakan anime</string>
+    <string name="login_email_label">Email</string>
+    <string name="login_email_hint">nama@email.com</string>
+    <string name="login_password_label">Kata Sandi</string>
+    <string name="login_password_hint">Minimal 6 karakter</string>
     <string name="login_btn">Masuk</string>
-    <string name="login_guest_btn">Lanjutkan sebagai Tamu</string>
-    <string name="login_forgot_password">Lupa kata sandi?</string>
+    <string name="login_guest_btn">Masuk sebagai Tamu</string>
+    <string name="login_forgot_password">Lupa Kata Sandi?</string>
+    <string name="login_no_account_prompt">Belum memiliki akun?</string>
+    <string name="login_register_now">Daftar Sekarang</string>
     <string name="login_no_account">Belum punya akun? Daftar</string>
     <string name="register_title">Buat Akun AniDex</string>
-    <string name="register_name_hint">Nama tampilan</string>
-    <string name="register_btn">Daftar</string>
+    <string name="register_subtitle">Daftar untuk menyimpan dan menyinkronkan daftar tontonanmu di semua perangkat.</string>
+    <string name="register_name_label">Nama Lengkap</string>
+    <string name="register_name_hint">Contoh: Haku</string>
+    <string name="register_confirm_password">Ulangi Kata Sandi</string>
+    <string name="register_password_mismatch">Konfirmasi kata sandi tidak cocok.</string>
+    <string name="register_btn">Daftar Akun</string>
+    <string name="register_has_account_prompt">Sudah memiliki akun?</string>
+    <string name="register_login_here">Masuk di Sini</string>
     <string name="register_has_account">Sudah punya akun? Masuk</string>
-    <string name="forgot_password_title">Atur Ulang Kata Sandi</string>
-    <string name="forgot_password_btn">Kirim Tautan Atur Ulang</string>
+    <string name="btn_back_to_login">Kembali ke Halaman Masuk</string>
+    <string name="forgot_password_title">Lupa Kata Sandi?</string>
+    <string name="forgot_password_subtitle">Masukkan alamat email yang terdaftar pada akun AniDex Anda. Kami akan mengirimkan tautan untuk mengatur ulang password.</string>
+    <string name="forgot_email_label">Email Terdaftar</string>
+    <string name="forgot_email_hint">email@domain.com</string>
+    <string name="forgot_password_btn">Kirim Tautan Reset</string>
+    <string name="forgot_back_to_login">Kembali ke Halaman Masuk</string>
+
+    <!-- Auth Errors & Messages -->
+    <string name="auth_err_empty_fields">Email dan password tidak boleh kosong.</string>
+    <string name="auth_err_invalid_email">Format email tidak valid.</string>
+    <string name="auth_err_password_too_short">Password minimal 6 karakter.</string>
+    <string name="auth_err_all_fields_required">Semua formulir pendaftaran wajib diisi.</string>
+    <string name="auth_reset_link_sent">Tautan reset password telah dikirim ke %1$s. Silakan periksa inbox atau spam.</string>
+
+    <!-- Watch Time & Stats Labels -->
+    <string name="label_completed_percent">Selesai: %1$d%%</string>
+    <string name="label_mean_score">Rerata Skor</string>
+    <string name="unit_hours">%1$s Jam</string>
+    <string name="unit_days">%1$d Hari</string>
+    <string name="unit_hours_short">%1$d Jam</string>
+    <string name="unit_minutes_short">%1$d Menit</string>
+    <string name="unit_time_h_m">%1$dj %2$dm</string>
+    <string name="unit_time_m">%1$d menit</string>
+    <string name="unit_titles">%1$d Judul</string>
+
+    <!-- Additional Common & Screen Strings -->
+    <string name="action_close">Tutup</string>
+    <string name="today_label">Hari Ini</string>
+    <string name="schedule_load_error">Gagal memuat jadwal</string>
+    <string name="error_load_catalog">Terjadi kesalahan saat memuat katalog anime</string>
+    <string name="label_category_prefix">Kategori: %1$s</string>
+    <string name="detail_loading">Memuat rincian anime…</string>
+    <string name="detail_load_error">Gagal memuat detail anime</string>
+    <string name="detail_share_toast">Membagikan anime: %1$s</string>
+    <string name="detail_no_synopsis">Tidak ada sinopsis tersedia.</string>
+    <string name="detail_episodes_watched">Episode Ditonton: %1$d / %2$s</string>
+    <string name="account_guest_offline">Tamu / Mode Offline</string>
+    <string name="btn_change_photo">Ganti Foto</string>
+    <string name="avatar_use_custom_url_btn">Atau gunakan tautan URL gambar avatar kustom</string>
+    <string name="section_personal_info">Informasi Diri</string>
+    <string name="dialog_custom_avatar_title">Tautan URL Avatar Kustom</string>
+    <string name="dialog_custom_avatar_desc">Tempelkan URL langsung gambar avatar (format JPG/PNG/WebP):</string>
+    <string name="msg_photo_pick_failed">Gagal mengambil foto: %1$s</string>
+    <string name="msg_avatar_url_selected">URL Avatar dipilih!</string>
+    <string name="countdown_aired_or_soon">Sudah Tayang / Segera</string>
+    <string name="countdown_in_days_hours_mins">%1$dh %2$dj %3$dm lagi</string>
+    <string name="countdown_in_hours_mins">%1$dj %2$dm lagi</string>
+    <string name="countdown_in_mins">%1$dm lagi</string>
+    <string name="rec_reason_popular">Sangat populer dan memiliki rating tinggi di komunitas anime.</string>
+    <string name="rec_reason_genres">Direkomendasikan karena kamu menyukai genre %1$s.</string>
+    <string name="rec_reason_genres_studio">Direkomendasikan karena kamu menyukai %1$s dari %2$s.</string>
+
+    <!-- Formats -->
+    <string name="format_tv">Serial TV</string>
+    <string name="format_movie">Film</string>
+    <string name="format_ova">OVA / Spesial</string>
+    <string name="format_ona">ONA (Web)</string>
+    <string name="format_special">Spesial</string>
+    <string name="format_music">Video Musik</string>
+    <string name="format_unknown">Tidak Diketahui</string>
+
+    <!-- Anime Statuses -->
+    <string name="anime_status_airing">Sedang Tayang</string>
+    <string name="anime_status_finished">Tamat</string>
+    <string name="anime_status_not_yet">Akan Tayang</string>
+    <string name="anime_status_unknown">Tidak Diketahui</string>
+
+    <!-- Avatar Presets -->
+    <string name="preset_kitsune">Kitsune Maskot</string>
+    <string name="preset_kitsune_desc">Maskot Resmi AniDex</string>
+    <string name="preset_shinobi">Shadow Shinobi</string>
+    <string name="preset_shinobi_desc">Ninja Bayangan Gesit</string>
+    <string name="preset_otaku">Cyber Otaku</string>
+    <string name="preset_otaku_desc">Netrunner &amp; Sci-Fi</string>
+    <string name="preset_sorcerer">Star Sorcerer</string>
+    <string name="preset_sorcerer_desc">Penyihir Bintang Fantasi</string>
+    <string name="preset_fighter">Shonen Hero</string>
+    <string name="preset_fighter_desc">Semangat Pantang Menyerah</string>
+    <string name="preset_pilot">Mecha Pilot</string>
+    <string name="preset_pilot_desc">Pilot Tempur Mecha</string>
+
+    <!-- Content Descriptions -->
+    <string name="desc_user_avatar">Avatar Pengguna</string>
+    <string name="desc_mascot_logo">Logo Maskot AniDex</string>
 </resources>
 

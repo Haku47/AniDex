@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import com.anidex.app.core.util.LanguageManager
+import com.anidex.app.core.util.LocalizedActivityContext
 import com.anidex.app.domain.repository.AuthRepository
 import com.anidex.app.ui.navigation.MainAppScaffold
 import com.anidex.app.ui.theme.AniDexTheme
@@ -31,13 +32,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val currentLanguage by LanguageManager.currentLanguage.collectAsState()
-            val context = LocalContext.current
+            val activity = this@MainActivity
 
             val localizedContext = remember(currentLanguage) {
-                LanguageManager.getLocalizedContext(context, currentLanguage)
+                applyLocale(currentLanguage)
+                val configContext = LanguageManager.getLocalizedContext(activity, currentLanguage)
+                LocalizedActivityContext(activity, configContext)
             }
             val configuration = remember(currentLanguage) {
-                Configuration(context.resources.configuration).apply {
+                Configuration(activity.resources.configuration).apply {
                     val locale = when (currentLanguage) {
                         LanguageManager.LANG_INDONESIAN -> Locale("in")
                         else -> Locale.ENGLISH
@@ -55,5 +58,17 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun applyLocale(langCode: String) {
+        val locale = when (langCode) {
+            LanguageManager.LANG_INDONESIAN -> Locale("in")
+            else -> Locale.ENGLISH
+        }
+        Locale.setDefault(locale)
+        val config = Configuration(resources.configuration)
+        config.setLocale(locale)
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }

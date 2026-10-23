@@ -146,9 +146,10 @@ class DiscoverViewModel @Inject constructor(
                 anime = anime,
                 status = status,
                 episodesWatched = if (status == WatchStatus.COMPLETED) anime.episodes ?: 1 else 0,
+                userScore = null,
                 lastUpdatedEpochMillis = System.currentTimeMillis()
             )
-            watchlistRepository.addToWatchlist(entry)
+            watchlistRepository.upsertWatchlistEntry(entry)
         }
     }
 }

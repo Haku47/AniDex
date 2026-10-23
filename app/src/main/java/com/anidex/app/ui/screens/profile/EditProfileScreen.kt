@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -88,14 +89,14 @@ import java.io.FileOutputStream
 
 private data class AvatarPreset(
     val id: String,
-    val name: String
+    @StringRes val nameRes: Int
 )
 
 private val avatarPresets = listOf(
-    AvatarPreset("kitsune", "Kitsune Maskot"),
-    AvatarPreset("shinobi", "Shadow Shinobi"),
-    AvatarPreset("otaku", "Cyber Otaku"),
-    AvatarPreset("sorcerer", "Star Sorcerer")
+    AvatarPreset("kitsune", R.string.preset_kitsune),
+    AvatarPreset("shinobi", R.string.preset_shinobi),
+    AvatarPreset("otaku", R.string.preset_otaku),
+    AvatarPreset("sorcerer", R.string.preset_sorcerer)
 )
 
 @Composable
@@ -129,9 +130,9 @@ fun EditProfileScreen(
                     }
                 }
                 selectedAvatar = avatarFile.absolutePath
-                Toast.makeText(context, "Foto profil berhasil dipilih!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.msg_photo_selected), Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Toast.makeText(context, "Gagal mengambil foto: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.msg_photo_pick_failed, e.localizedMessage ?: ""), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -147,7 +148,7 @@ fun EditProfileScreen(
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Top App Bar: Back button, Title "Edit Profil", and "Simpan" action
+        // Top App Bar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -162,7 +163,7 @@ fun EditProfileScreen(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Kembali",
+                        contentDescription = stringResource(R.string.action_back),
                         tint = TextPrimary
                     )
                 }
@@ -220,30 +221,25 @@ fun EditProfileScreen(
                     .padding(vertical = 20.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Centered Avatar Badge with Neon Ring + Camera Edit Button
                 Box(
-                    modifier = Modifier.size(112.dp),
+                    modifier = Modifier.size(116.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     UserAvatarBadge(
                         avatarId = selectedAvatar,
                         size = 104.dp,
-                        ringWidth = 2.5.dp,
-                        modifier = Modifier.clickable {
-                            photoPickerLauncher.launch(
-                                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                            )
-                        }
+                        ringWidth = 3.dp,
+                        showRing = true
                     )
 
-                    // Camera button badge
+                    // Floating Camera badge to trigger gallery picker
                     Box(
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
-                            .size(34.dp)
+                            .size(36.dp)
                             .clip(CircleShape)
                             .background(BrandOrange)
-                            .border(2.dp, SurfaceDark, CircleShape)
+                            .border(2.dp, DeepBackground, CircleShape)
                             .clickable {
                                 photoPickerLauncher.launch(
                                     PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -253,9 +249,9 @@ fun EditProfileScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.CameraAlt,
-                            contentDescription = "Ganti Foto Profil",
+                            contentDescription = stringResource(R.string.btn_change_photo),
                             tint = Color.White,
-                            modifier = Modifier.size(17.dp)
+                            modifier = Modifier.size(18.dp)
                         )
                     }
                 }
@@ -263,10 +259,16 @@ fun EditProfileScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = name.ifBlank { "Pengguna Tamu" },
+                    text = name.ifBlank { stringResource(R.string.profile_guest_user) },
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
+                    fontSize = 17.sp,
                     color = TextPrimary
+                )
+
+                Text(
+                    text = user?.email ?: "guest@anidex.app",
+                    fontSize = 12.sp,
+                    color = TextSecondary
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
@@ -276,29 +278,31 @@ fun EditProfileScreen(
                     color = SurfaceVariantDark
                 ) {
                     Text(
-                        text = bio.ifBlank { "Penjelajah & Pelacak Anime Baru" },
+                        text = bio.ifBlank { stringResource(R.string.profile_enthusiast) },
                         fontSize = 11.sp,
                         color = BrandCyan,
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        maxLines = 1
                     )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Section: Pilih Avatar Karakter
+        // Section: Presets & Gallery Upload
         Text(
-            text = "Pilih Avatar Karakter",
+            text = stringResource(R.string.section_profile_photo),
             color = BrandOrange,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
+        // Preset Avatars Selector
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             items(avatarPresets) { preset ->
@@ -319,7 +323,6 @@ fun EditProfileScreen(
                             showRing = true
                         )
 
-                        // Orange checkmark indicator badge for the selected avatar
                         if (isSelected) {
                             Box(
                                 modifier = Modifier
@@ -343,7 +346,7 @@ fun EditProfileScreen(
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = preset.name,
+                        text = stringResource(preset.nameRes),
                         fontSize = 11.sp,
                         color = if (isSelected) TextPrimary else TextSecondary,
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
@@ -354,7 +357,7 @@ fun EditProfileScreen(
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Button: Unggah Foto dari Galeri HP
+        // Button: Upload from Gallery
         Surface(
             shape = RoundedCornerShape(12.dp),
             color = SurfaceDark,
@@ -432,7 +435,7 @@ fun EditProfileScreen(
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = "Atau gunakan tautan URL gambar avatar kustom",
+                text = stringResource(R.string.avatar_use_custom_url_btn),
                 fontSize = 12.sp,
                 color = TextSecondary
             )
@@ -440,9 +443,9 @@ fun EditProfileScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Section: Informasi Diri
+        // Section: Personal Information
         Text(
-            text = "Informasi Diri",
+            text = stringResource(R.string.section_personal_info),
             color = BrandOrange,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp
@@ -450,7 +453,7 @@ fun EditProfileScreen(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Field 1: Nama Lengkap / Username
+        // Field 1: Username
         OutlinedTextField(
             value = name,
             onValueChange = { if (it.length <= 40) name = it },
@@ -487,7 +490,7 @@ fun EditProfileScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Field 2: Bio Anime / Status
+        // Field 2: Bio
         OutlinedTextField(
             value = bio,
             onValueChange = { if (it.length <= 160) bio = it },
@@ -524,9 +527,9 @@ fun EditProfileScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Section: Informasi Akun Terdaftar
+        // Section: Registered Account Information
         Text(
-            text = "Informasi Akun Terdaftar",
+            text = stringResource(R.string.section_account_info),
             color = BrandOrange,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp
@@ -542,8 +545,8 @@ fun EditProfileScreen(
             Column(modifier = Modifier.padding(16.dp)) {
                 AccountInfoRow(
                     icon = Icons.Default.Email,
-                    label = "Email Terdaftar",
-                    value = user?.email ?: "guest@anidex.app (Akun Tamu)",
+                    label = stringResource(R.string.account_email),
+                    value = user?.email ?: "guest@anidex.app",
                     tint = BrandOrange
                 )
 
@@ -555,8 +558,8 @@ fun EditProfileScreen(
 
                 AccountInfoRow(
                     icon = Icons.Default.VerifiedUser,
-                    label = "Status Akun",
-                    value = if (user?.email != null) "Terverifikasi" else "Tamu / Mode Offline",
+                    label = stringResource(R.string.account_status),
+                    value = if (user?.email != null) stringResource(R.string.account_active) else stringResource(R.string.account_guest_offline),
                     tint = BrandCyan
                 )
 
@@ -568,8 +571,8 @@ fun EditProfileScreen(
 
                 AccountInfoRow(
                     icon = Icons.Default.CalendarMonth,
-                    label = "Bergabung Sejak",
-                    value = user?.joinedDate ?: "Oktober 2026",
+                    label = stringResource(R.string.account_role),
+                    value = stringResource(R.string.account_role_val),
                     tint = BrandBlue
                 )
             }
@@ -584,7 +587,7 @@ fun EditProfileScreen(
             onDismissRequest = { showCustomUrlDialog = false },
             title = {
                 Text(
-                    text = "Tautan URL Avatar Kustom",
+                    text = stringResource(R.string.dialog_custom_avatar_title),
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary
                 )
@@ -592,7 +595,7 @@ fun EditProfileScreen(
             text = {
                 Column {
                     Text(
-                        text = "Tempelkan URL langsung gambar avatar (format JPG/PNG/WebP):",
+                        text = stringResource(R.string.dialog_custom_avatar_desc),
                         fontSize = 12.sp,
                         color = TextSecondary
                     )
@@ -600,16 +603,14 @@ fun EditProfileScreen(
                     OutlinedTextField(
                         value = customUrlInput,
                         onValueChange = { customUrlInput = it },
+                        placeholder = { Text("https://contoh.com/avatar.jpg", fontSize = 12.sp) },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = { Text("https://example.com/avatar.png", fontSize = 12.sp) },
                         singleLine = true,
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = BrandOrange,
-                            unfocusedBorderColor = CardBorder,
                             focusedTextColor = TextPrimary,
                             unfocusedTextColor = TextPrimary
-                        ),
-                        shape = RoundedCornerShape(10.dp)
+                        )
                     )
                 }
             },
@@ -618,20 +619,20 @@ fun EditProfileScreen(
                     onClick = {
                         if (customUrlInput.isNotBlank()) {
                             selectedAvatar = customUrlInput.trim()
+                            showCustomUrlDialog = false
+                            Toast.makeText(context, context.getString(R.string.msg_avatar_url_selected), Toast.LENGTH_SHORT).show()
                         }
-                        showCustomUrlDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = BrandOrange)
                 ) {
-                    Text("Terapkan", color = Color.White)
+                    Text(stringResource(R.string.action_apply))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCustomUrlDialog = false }) {
-                    Text("Batal", color = TextSecondary)
+                    Text(stringResource(R.string.action_cancel), color = TextSecondary)
                 }
-            },
-            containerColor = SurfaceDark
+            }
         )
     }
 }
@@ -651,7 +652,7 @@ private fun AccountInfoRow(
             imageVector = icon,
             contentDescription = null,
             tint = tint,
-            modifier = Modifier.size(18.dp)
+            modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(12.dp))
         Column {
@@ -662,11 +663,10 @@ private fun AccountInfoRow(
             )
             Text(
                 text = value,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 color = TextPrimary
             )
         }
     }
 }
-

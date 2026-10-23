@@ -1,5 +1,6 @@
 package com.anidex.app.ui.screens.onboarding
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -36,10 +37,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.domain.repository.AuthRepository
 import com.anidex.app.ui.navigation.Screen
 import com.anidex.app.ui.theme.BrandBlue
@@ -52,28 +55,28 @@ import com.anidex.app.ui.theme.TextSecondary
 import kotlinx.coroutines.launch
 
 data class OnboardingStep(
-    val title: String,
-    val subtitle: String,
+    @StringRes val titleRes: Int,
+    @StringRes val subtitleRes: Int,
     val icon: ImageVector,
     val accentColor: Color
 )
 
 val onboardingSteps = listOf(
     OnboardingStep(
-        title = "Katalog Anime Tanpa Batas",
-        subtitle = "Temukan puluhan ribu judul anime terbaru, terpopuler, dan klasik lengkap dengan sinopsis, rating, dan metadata resmi.",
+        titleRes = R.string.onboarding_title_1,
+        subtitleRes = R.string.onboarding_sub_1,
         icon = Icons.Default.AutoAwesome,
         accentColor = BrandOrange
     ),
     OnboardingStep(
-        title = "Lacak Progres & Jam Tonton",
-        subtitle = "Hitung otomatis akumulasi waktu tonton dalam hari, jam, dan menit. Perbarui progres episode hanya dengan satu sentuhan.",
+        titleRes = R.string.onboarding_title_2,
+        subtitleRes = R.string.onboarding_sub_2,
         icon = Icons.Default.HourglassTop,
         accentColor = BrandBlue
     ),
     OnboardingStep(
-        title = "Rekomendasi Cerdas & Jadwal Akurat",
-        subtitle = "Rekomendasi berbobot dari studio & genre favoritmu, serta konversi jadwal rilis tayang otomatis ke zona waktu lokal HP-mu.",
+        titleRes = R.string.onboarding_title_3,
+        subtitleRes = R.string.onboarding_sub_3,
         icon = Icons.Default.CalendarMonth,
         accentColor = BrandCyan
     )
@@ -110,7 +113,7 @@ fun OnboardingScreen(
                 exit = fadeOut()
             ) {
                 TextButton(onClick = { completeOnboarding() }) {
-                    Text(text = "Lewati", color = TextSecondary, fontSize = 14.sp)
+                    Text(text = stringResource(R.string.onboarding_skip), color = TextSecondary, fontSize = 14.sp)
                 }
             }
         }
@@ -156,7 +159,7 @@ fun OnboardingScreen(
                 Spacer(modifier = Modifier.height(36.dp))
 
                 Text(
-                    text = step.title,
+                    text = stringResource(step.titleRes),
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp,
                     color = TextPrimary,
@@ -166,7 +169,7 @@ fun OnboardingScreen(
                 Spacer(modifier = Modifier.height(14.dp))
 
                 Text(
-                    text = step.subtitle,
+                    text = stringResource(step.subtitleRes),
                     fontSize = 14.sp,
                     color = TextSecondary,
                     textAlign = TextAlign.Center,
@@ -216,7 +219,11 @@ fun OnboardingScreen(
             colors = ButtonDefaults.buttonColors(containerColor = BrandOrange)
         ) {
             Text(
-                text = if (pagerState.currentPage == onboardingSteps.size - 1) "Mulai Sekarang" else "Lanjutkan",
+                text = if (pagerState.currentPage == onboardingSteps.size - 1) {
+                    stringResource(R.string.onboarding_start)
+                } else {
+                    stringResource(R.string.onboarding_continue)
+                },
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,
                 color = Color.White

@@ -23,8 +23,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Delete
@@ -87,11 +87,11 @@ fun AnimeDetailScreen(
 
     when {
         state.isLoading -> {
-            LoadingState(message = "Memuat rincian anime...")
+            LoadingState(message = stringResource(R.string.detail_loading))
         }
         state.errorMessage != null && state.anime == null -> {
             ErrorState(
-                message = state.errorMessage ?: "Gagal memuat detail anime",
+                message = state.errorMessage ?: stringResource(R.string.detail_load_error),
                 onRetry = viewModel::loadDetail
             )
         }
@@ -149,8 +149,8 @@ fun AnimeDetailScreen(
                         ) {
                             IconButton(onClick = onNavigateBack) {
                                 Icon(
-                                    imageVector = Icons.Default.ArrowBack,
-                                    contentDescription = "Kembali",
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = stringResource(R.string.action_back),
                                     tint = Color.White
                                 )
                             }
@@ -163,7 +163,8 @@ fun AnimeDetailScreen(
                         ) {
                             IconButton(
                                 onClick = {
-                                    Toast.makeText(context, "Membagikan: ${anime.displayTitle}", Toast.LENGTH_SHORT).show()
+                                    val toastMsg = context.getString(R.string.detail_share_toast, anime.displayTitle)
+                                    Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show()
                                 }
                             ) {
                                 Icon(
@@ -286,12 +287,12 @@ fun AnimeDetailScreen(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Column {
-                                        Text(text = "Status Watchlist", fontSize = 11.sp, color = TextSecondary)
-                                        Text(text = entry.status.displayName, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandCyan)
+                                        Text(text = stringResource(R.string.detail_in_watchlist), fontSize = 11.sp, color = TextSecondary)
+                                        Text(text = stringResource(entry.status.titleRes), fontWeight = FontWeight.Bold, fontSize = 15.sp, color = BrandCyan)
                                     }
 
                                     IconButton(onClick = { viewModel.removeFromWatchlist() }) {
-                                        Icon(imageVector = Icons.Default.Delete, contentDescription = "Hapus", tint = BrandRed.copy(alpha = 0.8f))
+                                        Icon(imageVector = Icons.Default.Delete, contentDescription = stringResource(R.string.action_delete), tint = BrandRed.copy(alpha = 0.8f))
                                     }
                                 }
 
@@ -313,7 +314,7 @@ fun AnimeDetailScreen(
                                                 .clickable { viewModel.updateWatchlistStatus(status) }
                                         ) {
                                             Text(
-                                                text = status.displayName,
+                                                text = stringResource(status.titleRes),
                                                 fontSize = 11.sp,
                                                 fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
                                                 color = if (isCurrent) Color.White else TextSecondary,
@@ -335,8 +336,9 @@ fun AnimeDetailScreen(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     val total = anime.episodes ?: 0
+                                    val totalStr = if (total > 0) total.toString() else "?"
                                     Text(
-                                        text = "Episode Ditonton: ${entry.episodesWatched} / ${if (total > 0) total else '?'}",
+                                        text = stringResource(R.string.detail_episodes_watched, entry.episodesWatched, totalStr),
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.SemiBold,
                                         color = TextPrimary
@@ -349,7 +351,7 @@ fun AnimeDetailScreen(
                                             modifier = Modifier.size(32.dp),
                                             colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = SurfaceDark)
                                         ) {
-                                            Icon(imageVector = Icons.Default.Remove, contentDescription = "Kurang", modifier = Modifier.size(16.dp))
+                                            Icon(imageVector = Icons.Default.Remove, contentDescription = stringResource(R.string.action_minus_one), modifier = Modifier.size(16.dp))
                                         }
 
                                         Spacer(modifier = Modifier.width(6.dp))
@@ -360,7 +362,7 @@ fun AnimeDetailScreen(
                                             modifier = Modifier.size(32.dp),
                                             colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = BrandOrange, contentColor = Color.White)
                                         ) {
-                                            Icon(imageVector = Icons.Default.Add, contentDescription = "Tambah", modifier = Modifier.size(16.dp))
+                                            Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(R.string.action_plus_one), modifier = Modifier.size(16.dp))
                                         }
                                     }
                                 }
@@ -381,7 +383,7 @@ fun AnimeDetailScreen(
                     Spacer(modifier = Modifier.height(6.dp))
 
                     Text(
-                        text = anime.synopsis,
+                        text = anime.synopsis.ifBlank { stringResource(R.string.detail_no_synopsis) },
                         fontSize = 13.sp,
                         color = TextSecondary,
                         lineHeight = 20.sp,
@@ -417,11 +419,11 @@ fun AnimeDetailScreen(
                         colors = CardDefaults.cardColors(containerColor = SurfaceDark)
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
-                            SpecRow("Status", anime.status.name)
-                            SpecRow("Format", anime.format.name)
-                            SpecRow("Durasi per Ep", "${anime.effectiveDurationMinutes} Menit")
-                            SpecRow("Musim / Tahun", "${anime.season?.uppercase() ?: "-"} ${anime.year ?: ""}")
-                            SpecRow("Jadwal Tayang", "${anime.broadcastDay ?: "-"} (${anime.broadcastTime ?: "-"} JST)")
+                            SpecRow(stringResource(R.string.detail_status), stringResource(anime.status.titleRes))
+                            SpecRow(stringResource(R.string.detail_format), stringResource(anime.format.titleRes))
+                            SpecRow(stringResource(R.string.detail_duration), stringResource(R.string.unit_minutes_short, anime.effectiveDurationMinutes))
+                            SpecRow(stringResource(R.string.detail_season_year), "${anime.season?.uppercase() ?: "-"} ${anime.year ?: ""}")
+                            SpecRow(stringResource(R.string.detail_broadcast), "${anime.broadcastDay ?: "-"} (${anime.broadcastTime ?: "-"} JST)")
                         }
                     }
                 }

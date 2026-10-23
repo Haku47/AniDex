@@ -19,9 +19,9 @@ data class WatchTimeSummary(
     val formattedDisplayString: String
         get() {
             val parts = mutableListOf<String>()
-            if (days > 0) parts.add("$days Hari")
-            if (hours > 0) parts.add("$hours Jam")
-            if (minutes > 0 || parts.isEmpty()) parts.add("$minutes Menit")
+            if (days > 0) parts.add("$days Days")
+            if (hours > 0) parts.add("$hours Hours")
+            if (minutes > 0 || parts.isEmpty()) parts.add("$minutes Minutes")
             return parts.joinToString(", ")
         }
 

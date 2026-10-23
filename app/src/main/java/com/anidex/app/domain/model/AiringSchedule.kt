@@ -16,16 +16,16 @@ data class AiringSchedule(
 ) {
     val countdownFormatted: String
         get() {
-            if (countdownMillis <= 0) return "Sudah Tayang / Segera"
+            if (countdownMillis <= 0) return "Aired / Soon"
             val totalSeconds = countdownMillis / 1000
             val days = totalSeconds / (24 * 3600)
             val hours = (totalSeconds % (24 * 3600)) / 3600
             val minutes = (totalSeconds % 3600) / 60
 
             return buildString {
-                if (days > 0) append("${days}h ")
-                if (hours > 0 || days > 0) append("${hours}j ")
-                append("${minutes}m lagi")
+                if (days > 0) append("${days}d ")
+                if (hours > 0 || days > 0) append("${hours}h ")
+                append("${minutes}m left")
             }
         }
 }

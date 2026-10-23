@@ -1,14 +1,26 @@
 package com.anidex.app.core.util
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Locale
+
+class LocalizedActivityContext(
+    base: Activity,
+    private val localizedContext: Context
+) : ContextWrapper(base) {
+    override fun getResources(): Resources {
+        return localizedContext.resources
+    }
+}
 
 object LanguageManager {
     private const val PREFS_NAME = "anidex_language_prefs"
@@ -59,4 +71,3 @@ object LanguageManager {
         }
     }
 }
-

@@ -17,7 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
@@ -46,8 +46,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.ui.theme.BrandBlue
 import com.anidex.app.ui.theme.BrandOrange
 import com.anidex.app.ui.theme.BrandRed
@@ -70,6 +72,7 @@ fun RegisterScreen(
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var validationError by remember { mutableStateOf<String?>(null) }
+    val passwordMismatchMsg = stringResource(R.string.register_password_mismatch)
 
     Column(
         modifier = Modifier
@@ -88,8 +91,8 @@ fun RegisterScreen(
             modifier = Modifier.size(36.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Kembali ke Login",
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = stringResource(R.string.btn_back_to_login),
                 tint = TextPrimary
             )
         }
@@ -97,14 +100,14 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Buat Akun AniDex",
+            text = stringResource(R.string.register_title),
             fontWeight = FontWeight.Bold,
             fontSize = 26.sp,
             color = TextPrimary
         )
 
         Text(
-            text = "Daftar untuk menyimpan dan menyinkronkan daftar tontonanmu di semua perangkat.",
+            text = stringResource(R.string.register_subtitle),
             fontSize = 13.sp,
             color = TextSecondary,
             lineHeight = 18.sp
@@ -134,8 +137,8 @@ fun RegisterScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it; validationError = null },
-            label = { Text("Nama Lengkap") },
-            placeholder = { Text("Contoh: Haku") },
+            label = { Text(stringResource(R.string.register_name_label)) },
+            placeholder = { Text(stringResource(R.string.register_name_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Person, contentDescription = null, tint = BrandOrange)
             },
@@ -158,8 +161,8 @@ fun RegisterScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it; validationError = null },
-            label = { Text("Email") },
-            placeholder = { Text("haku@email.com") },
+            label = { Text(stringResource(R.string.login_email_label)) },
+            placeholder = { Text(stringResource(R.string.login_email_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Email, contentDescription = null, tint = BrandBlue)
             },
@@ -183,8 +186,8 @@ fun RegisterScreen(
         OutlinedTextField(
             value = password,
             onValueChange = { password = it; validationError = null },
-            label = { Text("Password") },
-            placeholder = { Text("Minimal 6 karakter") },
+            label = { Text(stringResource(R.string.login_password_label)) },
+            placeholder = { Text(stringResource(R.string.login_password_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription = null, tint = BrandOrange)
             },
@@ -218,7 +221,7 @@ fun RegisterScreen(
         OutlinedTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it; validationError = null },
-            label = { Text("Ulangi Password") },
+            label = { Text(stringResource(R.string.register_confirm_password)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Lock, contentDescription = null, tint = BrandBlue)
             },
@@ -243,7 +246,7 @@ fun RegisterScreen(
         Button(
             onClick = {
                 if (password != confirmPassword) {
-                    validationError = "Konfirmasi password tidak cocok."
+                    validationError = passwordMismatchMsg
                 } else {
                     viewModel.register(name, email, password, onRegisterSuccess)
                 }
@@ -258,7 +261,7 @@ fun RegisterScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
             } else {
-                Text(text = "Daftar Akun", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
+                Text(text = stringResource(R.string.register_btn), fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
             }
         }
 
@@ -268,10 +271,10 @@ fun RegisterScreen(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text(text = "Sudah memiliki akun?", color = TextSecondary, fontSize = 13.sp)
+            Text(text = stringResource(R.string.register_has_account_prompt), color = TextSecondary, fontSize = 13.sp)
             Spacer(modifier = Modifier.width(4.dp))
             TextButton(onClick = onNavigateBackToLogin) {
-                Text(text = "Masuk di Sini", color = BrandOrange, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                Text(text = stringResource(R.string.register_login_here), color = BrandOrange, fontWeight = FontWeight.Bold, fontSize = 13.sp)
             }
         }
 

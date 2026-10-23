@@ -31,11 +31,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.anidex.app.R
 import com.anidex.app.domain.model.Anime
 import com.anidex.app.ui.theme.BrandBlue
 import com.anidex.app.ui.theme.BrandOrange
@@ -173,7 +175,7 @@ fun AnimeGridCard(
                     ) {
                         Icon(
                             imageVector = Icons.Default.BookmarkAdd,
-                            contentDescription = "Tambahkan ke Watchlist",
+                            contentDescription = stringResource(R.string.detail_add_to_watchlist),
                             tint = BrandOrange,
                             modifier = Modifier.size(18.dp)
                         )

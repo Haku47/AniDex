@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -74,7 +75,7 @@ fun UserAvatarBadge(
             isCustomImage -> {
                 AsyncImage(
                     model = avatarId,
-                    contentDescription = "Avatar Image",
+                    contentDescription = stringResource(R.string.desc_user_avatar),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(innerSize)
@@ -84,7 +85,7 @@ fun UserAvatarBadge(
             avatarId.equals("shinobi", ignoreCase = true) -> {
                 Icon(
                     imageVector = Icons.Filled.Shield,
-                    contentDescription = "Shadow Shinobi Avatar",
+                    contentDescription = stringResource(R.string.preset_shinobi),
                     tint = Color(0xFFFF3366),
                     modifier = Modifier.size(innerSize * 0.75f)
                 )
@@ -92,7 +93,7 @@ fun UserAvatarBadge(
             avatarId.equals("otaku", ignoreCase = true) -> {
                 Icon(
                     imageVector = Icons.Filled.SmartToy,
-                    contentDescription = "Cyber Otaku Avatar",
+                    contentDescription = stringResource(R.string.preset_otaku),
                     tint = BrandCyan,
                     modifier = Modifier.size(innerSize * 0.75f)
                 )
@@ -100,7 +101,7 @@ fun UserAvatarBadge(
             avatarId.equals("sorcerer", ignoreCase = true) -> {
                 Icon(
                     imageVector = Icons.Filled.AutoAwesome,
-                    contentDescription = "Star Sorcerer Avatar",
+                    contentDescription = stringResource(R.string.preset_sorcerer),
                     tint = Color(0xFFB388FF),
                     modifier = Modifier.size(innerSize * 0.75f)
                 )
@@ -109,7 +110,7 @@ fun UserAvatarBadge(
                 // Default: Kitsune Maskot Logo Fox
                 Image(
                     painter = painterResource(id = R.drawable.logo_anidex),
-                    contentDescription = "Kitsune Mascot Avatar",
+                    contentDescription = stringResource(R.string.preset_kitsune),
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.size(innerSize)
                 )

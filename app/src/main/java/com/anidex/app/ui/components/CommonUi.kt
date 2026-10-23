@@ -19,10 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.ui.theme.BrandOrange
 import com.anidex.app.ui.theme.BrandRed
 import com.anidex.app.ui.theme.TextPrimary
@@ -32,7 +34,7 @@ import com.anidex.app.ui.theme.TextTertiary
 @Composable
 fun LoadingState(
     modifier: Modifier = Modifier,
-    message: String = "Memuat data anime..."
+    message: String = stringResource(R.string.loading_default)
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -76,7 +78,7 @@ fun ErrorState(
             )
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "Oops! Terjadi Masalah",
+                text = stringResource(R.string.error_generic_title),
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
                 color = TextPrimary
@@ -93,7 +95,7 @@ fun ErrorState(
                 onClick = onRetry,
                 colors = ButtonDefaults.buttonColors(containerColor = BrandOrange)
             ) {
-                Text(text = "Coba Lagi", color = TextPrimary)
+                Text(text = stringResource(R.string.action_retry), color = TextPrimary)
             }
         }
     }

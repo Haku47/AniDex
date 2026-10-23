@@ -98,7 +98,7 @@ fun SettingsScreen(
             IconButton(onClick = onNavigateBack, modifier = Modifier.size(36.dp)) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Kembali",
+                    contentDescription = stringResource(R.string.action_back),
                     tint = TextPrimary
                 )
             }
@@ -219,8 +219,8 @@ fun SettingsScreen(
     // Language Selection Dialog
     if (showLanguageDialog) {
         val languages = listOf(
-            LanguageManager.LANG_ENGLISH to "English (Default)",
-            LanguageManager.LANG_INDONESIAN to "Bahasa Indonesia (Opsional)"
+            LanguageManager.LANG_ENGLISH to "English",
+            LanguageManager.LANG_INDONESIAN to "Bahasa Indonesia"
         )
 
         AlertDialog(
@@ -272,7 +272,7 @@ fun SettingsScreen(
             },
             confirmButton = {
                 TextButton(onClick = { showLanguageDialog = false }) {
-                    Text(text = "Tutup", color = BrandOrange)
+                    Text(text = stringResource(R.string.action_close), color = BrandOrange)
                 }
             }
         )

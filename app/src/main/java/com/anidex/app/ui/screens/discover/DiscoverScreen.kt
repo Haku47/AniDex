@@ -261,7 +261,7 @@ fun DiscoverScreen(
             }
             state.errorMessage != null -> {
                 ErrorState(
-                    message = state.errorMessage ?: "Terjadi kesalahan",
+                    message = state.errorMessage ?: stringResource(R.string.error_load_catalog),
                     onRetry = viewModel::loadDiscoverData
                 )
             }
@@ -305,7 +305,7 @@ fun DiscoverScreen(
                     ) {
                         item(span = { GridItemSpan(2) }) {
                             Text(
-                                text = "Kategori: ${state.selectedCategory}",
+                                text = stringResource(R.string.label_category_prefix, state.selectedCategory ?: ""),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 16.sp,
                                 color = TextPrimary,
@@ -767,8 +767,17 @@ private fun RecommendationCard(
 
             Spacer(modifier = Modifier.height(6.dp))
 
+            val reasonText = when {
+                rec.matchedGenres.isNotEmpty() && rec.matchedStudios.isNotEmpty() ->
+                    stringResource(R.string.rec_reason_genres_studio, rec.matchedGenres.take(2).joinToString(" & "), rec.matchedStudios.first())
+                rec.matchedGenres.isNotEmpty() ->
+                    stringResource(R.string.rec_reason_genres, rec.matchedGenres.take(2).joinToString(" & "))
+                else ->
+                    stringResource(R.string.rec_reason_popular)
+            }
+
             Text(
-                text = rec.reasonDescription,
+                text = reasonText,
                 fontSize = 10.sp,
                 color = TextSecondary,
                 maxLines = 2,

@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -34,10 +34,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.ui.theme.BrandOrange
 import com.anidex.app.ui.theme.BrandRed
 import com.anidex.app.ui.theme.CardBorder
@@ -70,8 +72,8 @@ fun ForgotPasswordScreen(
             modifier = Modifier.size(36.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Kembali ke Login",
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = stringResource(R.string.btn_back_to_login),
                 tint = TextPrimary
             )
         }
@@ -79,7 +81,7 @@ fun ForgotPasswordScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "Lupa Password?",
+            text = stringResource(R.string.forgot_password_title),
             fontWeight = FontWeight.Bold,
             fontSize = 26.sp,
             color = TextPrimary
@@ -88,7 +90,7 @@ fun ForgotPasswordScreen(
         Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-            text = "Masukkan alamat email yang terdaftar pada akun AniDex Anda. Kami akan mengirimkan tautan untuk mengatur ulang password.",
+            text = stringResource(R.string.forgot_password_subtitle),
             fontSize = 13.sp,
             color = TextSecondary,
             lineHeight = 18.sp
@@ -135,8 +137,8 @@ fun ForgotPasswordScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it; viewModel.clearMessages() },
-            label = { Text("Email Terdaftar") },
-            placeholder = { Text("email@domain.com") },
+            label = { Text(stringResource(R.string.forgot_email_label)) },
+            placeholder = { Text(stringResource(R.string.forgot_email_hint)) },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Email, contentDescription = null, tint = BrandOrange)
             },
@@ -168,7 +170,7 @@ fun ForgotPasswordScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
             } else {
-                Text(text = "Kirim Tautan Reset", fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
+                Text(text = stringResource(R.string.forgot_password_btn), fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
             }
         }
 
@@ -178,7 +180,7 @@ fun ForgotPasswordScreen(
             onClick = onNavigateBackToLogin,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text(text = "Kembali ke Halaman Masuk", color = TextSecondary, fontSize = 13.sp)
+            Text(text = stringResource(R.string.forgot_back_to_login), color = TextSecondary, fontSize = 13.sp)
         }
     }
 }

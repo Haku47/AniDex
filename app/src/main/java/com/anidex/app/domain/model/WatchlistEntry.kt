@@ -1,11 +1,17 @@
 package com.anidex.app.domain.model
 
-enum class WatchStatus(val displayName: String) {
-    WATCHING("Sedang Ditonton"),
-    COMPLETED("Selesai"),
-    ON_HOLD("Ditunda"),
-    DROPPED("Ditinggalkan"),
-    PLAN_TO_WATCH("Rencana Nonton")
+import androidx.annotation.StringRes
+import com.anidex.app.R
+
+enum class WatchStatus(
+    val displayName: String,
+    @StringRes val titleRes: Int
+) {
+    WATCHING("Watching", R.string.status_watching),
+    COMPLETED("Completed", R.string.status_completed),
+    ON_HOLD("On Hold", R.string.status_hold),
+    DROPPED("Dropped", R.string.status_dropped),
+    PLAN_TO_WATCH("Plan to Watch", R.string.status_plan)
 }
 
 data class WatchlistEntry(

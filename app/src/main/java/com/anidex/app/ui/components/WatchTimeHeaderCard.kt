@@ -25,9 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.anidex.app.R
 import com.anidex.app.domain.model.WatchTimeSummary
 import com.anidex.app.ui.theme.BrandBlue
 import com.anidex.app.ui.theme.BrandCyan
@@ -69,7 +71,7 @@ fun WatchTimeHeaderCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "TOTAL WAKTU TONTON",
+                        text = stringResource(R.string.label_total_watch_time).uppercase(),
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = 11.sp,
                         letterSpacing = 1.sp,
@@ -78,7 +80,7 @@ fun WatchTimeHeaderCard(
 
                     val completionPercent = (summary.completionRate * 100).toInt()
                     Text(
-                        text = "Selesai: $completionPercent%",
+                        text = stringResource(R.string.label_completed_percent, completionPercent),
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp,
                         color = BrandCyan
@@ -87,9 +89,17 @@ fun WatchTimeHeaderCard(
 
                 Spacer(modifier = Modifier.height(6.dp))
 
+                val daysUnit = stringResource(R.string.unit_days, summary.days)
+                val hoursUnit = stringResource(R.string.unit_hours_short, summary.hours)
+                val minutesUnit = stringResource(R.string.unit_minutes_short, summary.minutes)
+                val timeParts = mutableListOf<String>()
+                if (summary.days > 0) timeParts.add(daysUnit)
+                if (summary.hours > 0) timeParts.add(hoursUnit)
+                if (summary.minutes > 0 || timeParts.isEmpty()) timeParts.add(minutesUnit)
+
                 // Big duration display
                 Text(
-                    text = summary.formattedDisplayString,
+                    text = timeParts.joinToString(", "),
                     fontWeight = FontWeight.Black,
                     fontSize = 24.sp,
                     color = Color.White
@@ -104,22 +114,22 @@ fun WatchTimeHeaderCard(
                 ) {
                     StatPill(
                         icon = Icons.Default.PlayCircle,
-                        label = "Episode",
+                        label = stringResource(R.string.label_episodes),
                         value = "${summary.totalEpisodesWatched} Ep",
                         modifier = Modifier.weight(1f)
                     )
 
                     StatPill(
                         icon = Icons.Default.HourglassTop,
-                        label = "Total Jam",
-                        value = String.format("%.1f Jam", summary.totalHoursPrecise),
+                        label = stringResource(R.string.stats_total_hours),
+                        value = stringResource(R.string.unit_hours, String.format("%.1f", summary.totalHoursPrecise)),
                         modifier = Modifier.weight(1f)
                     )
 
                     summary.meanUserRating?.let { rating ->
                         StatPill(
                             icon = Icons.Default.Star,
-                            label = "Rerata Skor",
+                            label = stringResource(R.string.label_mean_score),
                             value = String.format("%.1f", rating),
                             tint = BrandYellow,
                             modifier = Modifier.weight(1f)

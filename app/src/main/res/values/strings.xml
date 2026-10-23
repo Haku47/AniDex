@@ -142,19 +142,138 @@
     <string name="detail_in_watchlist">In Watchlist</string>
     <string name="detail_specs">Additional Information</string>
 
+    <!-- Generic Actions & Labels -->
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_retry">Try Again</string>
+    <string name="action_mark_completed">Mark as Completed</string>
+    <string name="action_minus_one">Decrease 1</string>
+    <string name="action_plus_one">Increase 1</string>
+    <string name="plus_one_episode">+1 Episode</string>
+    <string name="loading_default">Loading anime data…</string>
+    <string name="error_generic_title">Oops! Something Went Wrong</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_tagline">Complete Anime Catalog, Smart Tracker &amp; Schedule</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_start">Get Started</string>
+    <string name="onboarding_title_1">Boundless Anime Catalog</string>
+    <string name="onboarding_sub_1">Discover tens of thousands of new, popular, and classic anime titles complete with synopses, ratings, and official metadata.</string>
+    <string name="onboarding_title_2">Track Progress &amp; Watch Time</string>
+    <string name="onboarding_sub_2">Automatically calculate accumulated watch time in days, hours, and minutes. Update episode progress with just one tap.</string>
+    <string name="onboarding_title_3">Smart Recommendations &amp; Schedule</string>
+    <string name="onboarding_sub_3">Personalized suggestions from your favorite studios and genres, plus broadcast schedules automatically converted to your local time.</string>
+
     <!-- Auth -->
     <string name="login_title">Welcome to AniDex</string>
-    <string name="login_subtitle">Log in to sync your anime watchlist and statistics</string>
-    <string name="login_email_hint">Email address</string>
-    <string name="login_password_hint">Password</string>
+    <string name="login_subtitle">Sign in to continue tracking your anime</string>
+    <string name="login_email_label">Email</string>
+    <string name="login_email_hint">name@email.com</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_password_hint">Minimum 6 characters</string>
     <string name="login_btn">Sign In</string>
     <string name="login_guest_btn">Continue as Guest</string>
     <string name="login_forgot_password">Forgot password?</string>
+    <string name="login_no_account_prompt">Don\'t have an account?</string>
+    <string name="login_register_now">Register Now</string>
     <string name="login_no_account">Don\'t have an account? Sign Up</string>
     <string name="register_title">Create AniDex Account</string>
-    <string name="register_name_hint">Display name</string>
+    <string name="register_subtitle">Register to save and synchronize your watchlist across all your devices.</string>
+    <string name="register_name_label">Full Name</string>
+    <string name="register_name_hint">e.g. Haku</string>
+    <string name="register_confirm_password">Confirm Password</string>
+    <string name="register_password_mismatch">Passwords do not match.</string>
     <string name="register_btn">Sign Up</string>
+    <string name="register_has_account_prompt">Already have an account?</string>
+    <string name="register_login_here">Sign In Here</string>
     <string name="register_has_account">Already have an account? Sign In</string>
-    <string name="forgot_password_title">Reset Password</string>
+    <string name="btn_back_to_login">Back to Sign In</string>
+    <string name="forgot_password_title">Forgot Password?</string>
+    <string name="forgot_password_subtitle">Enter your registered AniDex email address. We will send you instructions to reset your password.</string>
+    <string name="forgot_email_label">Registered Email</string>
+    <string name="forgot_email_hint">email@domain.com</string>
     <string name="forgot_password_btn">Send Reset Link</string>
+    <string name="forgot_back_to_login">Back to Sign In</string>
+
+    <!-- Auth Errors & Messages -->
+    <string name="auth_err_empty_fields">Email and password cannot be empty.</string>
+    <string name="auth_err_invalid_email">Invalid email format.</string>
+    <string name="auth_err_password_too_short">Password must be at least 6 characters.</string>
+    <string name="auth_err_all_fields_required">All registration fields are required.</string>
+    <string name="auth_reset_link_sent">Password reset link sent to %1$s. Please check your inbox or spam.</string>
+
+    <!-- Watch Time & Stats Labels -->
+    <string name="label_completed_percent">Completed: %1$d%%</string>
+    <string name="label_mean_score">Mean Score</string>
+    <string name="unit_hours">%1$s Hours</string>
+    <string name="unit_days">%1$d Days</string>
+    <string name="unit_hours_short">%1$d Hours</string>
+    <string name="unit_minutes_short">%1$d Minutes</string>
+    <string name="unit_time_h_m">%1$dh %2$dm</string>
+    <string name="unit_time_m">%1$d min</string>
+    <string name="unit_titles">%1$d Titles</string>
+
+    <!-- Additional Common & Screen Strings -->
+    <string name="action_close">Close</string>
+    <string name="today_label">Today</string>
+    <string name="schedule_load_error">Failed to load schedule</string>
+    <string name="error_load_catalog">An error occurred while loading the anime catalog</string>
+    <string name="label_category_prefix">Category: %1$s</string>
+    <string name="detail_loading">Loading anime details…</string>
+    <string name="detail_load_error">Failed to load anime details</string>
+    <string name="detail_share_toast">Sharing anime: %1$s</string>
+    <string name="detail_no_synopsis">No synopsis available.</string>
+    <string name="detail_episodes_watched">Episodes Watched: %1$d / %2$s</string>
+    <string name="account_guest_offline">Guest / Offline Mode</string>
+    <string name="btn_change_photo">Change Photo</string>
+    <string name="avatar_use_custom_url_btn">Or use a custom avatar image URL</string>
+    <string name="section_personal_info">Personal Information</string>
+    <string name="dialog_custom_avatar_title">Custom Avatar URL</string>
+    <string name="dialog_custom_avatar_desc">Paste direct image link for your avatar (JPG/PNG/WebP format):</string>
+    <string name="msg_photo_pick_failed">Failed to pick image: %1$s</string>
+    <string name="msg_avatar_url_selected">Avatar URL applied!</string>
+    <string name="countdown_aired_or_soon">Aired / Soon</string>
+    <string name="countdown_in_days_hours_mins">%1$dd %2$dh %3$dm left</string>
+    <string name="countdown_in_hours_mins">%1$dh %2$dm left</string>
+    <string name="countdown_in_mins">%1$dm left</string>
+    <string name="rec_reason_popular">Highly popular with top ratings in the community.</string>
+    <string name="rec_reason_genres">Recommended based on your interest in %1$s.</string>
+    <string name="rec_reason_genres_studio">Recommended based on %1$s by %2$s.</string>
+
+    <!-- Formats -->
+    <string name="format_tv">TV Series</string>
+    <string name="format_movie">Movie</string>
+    <string name="format_ova">OVA / Special</string>
+    <string name="format_ona">ONA (Web)</string>
+    <string name="format_special">Special</string>
+    <string name="format_music">Music Video</string>
+    <string name="format_unknown">Unknown</string>
+
+    <!-- Anime Statuses -->
+    <string name="anime_status_airing">Currently Airing</string>
+    <string name="anime_status_finished">Completed</string>
+    <string name="anime_status_not_yet">Upcoming</string>
+    <string name="anime_status_unknown">Unknown</string>
+
+    <!-- Avatar Presets -->
+    <string name="preset_kitsune">Kitsune Mascot</string>
+    <string name="preset_kitsune_desc">Official AniDex Mascot</string>
+    <string name="preset_shinobi">Shadow Shinobi</string>
+    <string name="preset_shinobi_desc">Agile Shadow Ninja</string>
+    <string name="preset_otaku">Cyber Otaku</string>
+    <string name="preset_otaku_desc">Netrunner &amp; Sci-Fi</string>
+    <string name="preset_sorcerer">Star Sorcerer</string>
+    <string name="preset_sorcerer_desc">Fantasy Star Magician</string>
+    <string name="preset_fighter">Shonen Hero</string>
+    <string name="preset_fighter_desc">Unbreakable Spirit</string>
+    <string name="preset_pilot">Mecha Pilot</string>
+    <string name="preset_pilot_desc">Mecha Combat Pilot</string>
+
+    <!-- Content Descriptions -->
+    <string name="desc_user_avatar">User Avatar</string>
+    <string name="desc_mascot_logo">AniDex Mascot Logo</string>
 </resources>

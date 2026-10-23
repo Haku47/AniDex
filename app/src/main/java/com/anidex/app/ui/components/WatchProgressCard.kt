@@ -33,11 +33,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.anidex.app.R
 import com.anidex.app.domain.model.WatchStatus
 import com.anidex.app.domain.model.WatchlistEntry
 import com.anidex.app.ui.theme.BrandBlue
@@ -108,7 +110,7 @@ fun WatchProgressCard(
                             color = SurfaceVariantDark
                         ) {
                             Text(
-                                text = entry.status.displayName,
+                                text = stringResource(entry.status.titleRes),
                                 fontSize = 10.sp,
                                 color = BrandCyan,
                                 fontWeight = FontWeight.SemiBold,
@@ -119,7 +121,11 @@ fun WatchProgressCard(
                         // Time spent on this title
                         val hours = entry.minutesSpent / 60
                         val mins = entry.minutesSpent % 60
-                        val timeStr = if (hours > 0) "${hours}j ${mins}m" else "${mins} menit"
+                        val timeStr = if (hours > 0) {
+                            stringResource(R.string.unit_time_h_m, hours, mins)
+                        } else {
+                            stringResource(R.string.unit_time_m, mins)
+                        }
                         Text(
                             text = "⏱ $timeStr",
                             color = TextSecondary,
@@ -191,7 +197,7 @@ fun WatchProgressCard(
                             contentColor = TextPrimary
                         )
                     ) {
-                        Icon(imageVector = Icons.Default.Remove, contentDescription = "Kurang 1", modifier = Modifier.size(16.dp))
+                        Icon(imageVector = Icons.Default.Remove, contentDescription = stringResource(R.string.action_minus_one), modifier = Modifier.size(16.dp))
                     }
 
                     Spacer(modifier = Modifier.width(6.dp))
@@ -205,13 +211,13 @@ fun WatchProgressCard(
                             contentColor = Color.White
                         )
                     ) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Tambah 1", modifier = Modifier.size(16.dp))
+                        Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(R.string.action_plus_one), modifier = Modifier.size(16.dp))
                     }
 
                     Spacer(modifier = Modifier.width(10.dp))
 
                     Text(
-                        text = "+1 Episode",
+                        text = stringResource(R.string.plus_one_episode),
                         color = TextSecondary,
                         fontSize = 11.sp
                     )
@@ -225,7 +231,7 @@ fun WatchProgressCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Check,
-                                contentDescription = "Tandai Selesai",
+                                contentDescription = stringResource(R.string.action_mark_completed),
                                 tint = SuccessGreen,
                                 modifier = Modifier.size(18.dp)
                             )
@@ -238,7 +244,7 @@ fun WatchProgressCard(
                     ) {
                         Icon(
                             imageVector = Icons.Default.DeleteOutline,
-                            contentDescription = "Hapus",
+                            contentDescription = stringResource(R.string.action_delete),
                             tint = BrandRed.copy(alpha = 0.7f),
                             modifier = Modifier.size(18.dp)
                         )

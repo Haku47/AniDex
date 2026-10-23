@@ -106,7 +106,7 @@ fun ScheduleScreen(
                         )
                         if (isToday) {
                             Text(
-                                text = "Hari Ini",
+                                text = stringResource(R.string.today_label),
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (isSelected) Color.White else BrandCyan
@@ -125,7 +125,7 @@ fun ScheduleScreen(
             }
             state.errorMessage != null -> {
                 ErrorState(
-                    message = state.errorMessage ?: "Gagal memuat jadwal",
+                    message = state.errorMessage ?: stringResource(R.string.schedule_load_error),
                     onRetry = viewModel::loadSchedules
                 )
             }

@@ -23,11 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.anidex.app.R
 import com.anidex.app.domain.model.AiringSchedule
 import com.anidex.app.ui.theme.BrandBlue
 import com.anidex.app.ui.theme.BrandCyan
@@ -100,12 +102,26 @@ fun AiringScheduleCard(
                     }
 
                     // Countdown badge (Brand Orange)
+                    val countdownFormatted = if (schedule.countdownMillis <= 0) {
+                        stringResource(R.string.countdown_aired_or_soon)
+                    } else {
+                        val totalSeconds = schedule.countdownMillis / 1000
+                        val days = totalSeconds / (24 * 3600)
+                        val hours = (totalSeconds % (24 * 3600)) / 3600
+                        val minutes = (totalSeconds % 3600) / 60
+                        when {
+                            days > 0 -> stringResource(R.string.countdown_in_days_hours_mins, days, hours, minutes)
+                            hours > 0 -> stringResource(R.string.countdown_in_hours_mins, hours, minutes)
+                            else -> stringResource(R.string.countdown_in_mins, minutes)
+                        }
+                    }
+
                     Surface(
                         shape = RoundedCornerShape(6.dp),
                         color = if (schedule.isAiringToday) BrandOrange.copy(alpha = 0.25f) else SurfaceVariantDark
                     ) {
                         Text(
-                            text = schedule.countdownFormatted,
+                            text = countdownFormatted,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = if (schedule.isAiringToday) BrandOrange else TextSecondary,
